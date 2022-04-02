@@ -1,0 +1,10 @@
+Project/.vs
+Project/_Resharper.Caches
+Project/Application/bin
+Project/Application/obj
+Project/Core/bin
+Project/Core/obj
+Project/Infrastructure/bin
+Project/Infrastructure/obj
+Project/Presentation/bin
+Project/Presentation/obj
