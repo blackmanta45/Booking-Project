@@ -1,0 +1,127 @@
+﻿@page
+@model Presentation.Pages.Home.IndexPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Core.Common.Enums;
+@using Presentation.Models.Home;
+@{
+}
+
+<form method="post">
+    <div class="grid-search">
+        <input class="form-control date-input" placeholder="Select period" type="text" name="datefilter" value="" id="datefilter" />
+        <input class="form-control location-input" placeholder="Select location" type="text" name="location" value="" id="location" />
+        <select 
+            name="people" 
+            id="people" 
+
+            asp-for="ViewModel.People" 
+            asp-items=@(Html.GetEnumSelectList<AvailableRoomSize>())
+
+            class="form-control people-input" 
+            placeholder="Select people" 
+            onchange="personsChanged()">
+        </select>
+    </div>
+    <div class="map" id="map"></div>
+
+    <button class="submit-button btn btn-primary" type="submit">Search</button>
+
+</form>
+
+<script type="text/javascript">
+  $(function() {
+    var datepickeropen = false;
+    $('input[name="datefilter"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+        cancelLabel: 'Clear'
+      }
+    });
+
+    $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+      localStorage.setItem("picked-date", $(this).get()[0].value);
+      localStorage.setItem("start-date", picker.startDate);
+      localStorage.setItem("end-date", picker.endDate);
+    });
+
+    $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+    });
+
+    $('input[name="datefilter"]').on('show.daterangepicker', function(ev, picker) {
+      var datefilter = document.getElementById("datefilter");
+      datefilter.style.background = "#ddd";
+      datepickeropen = true;
+    });
+
+    $('input[name="datefilter"]').on('hide.daterangepicker', function(ev, picker) {
+      var datefilter = document.getElementById('datefilter');
+      datefilter.style.background = "white";
+      datepickeropen = false;
+    });
+
+    $('input').bind('mouseover', function() {
+      var input = $(this)[0];
+      input.style.background = "#ddd";
+      input.style.zIndex = 1;
+
+      $('input').bind('mouseout', function() {
+        if (datepickeropen == false || (datepickeropen == true && input.name != "datefilter")) {
+          input.style.background = "white";
+          input.style.zIndex = 0;
+        }
+      });
+    });
+
+    $('select').bind('mouseover', function() {
+      var select = $(this)[0];
+      select.style.background = '#ddd';
+      select.style.zIndex = 1;
+
+      $('select').bind('mouseout', function() {
+        if (datepickeropen == false || (datepickeropen == true && select.name != "datefilter")) {
+          select.style.background = 'white';
+          select.style.zIndex = 0;
+        }
+      });
+    });
+
+  });
+</script>
+
+<!-- map script -->
+<script>
+  function addressUpdated(addressComponents) {
+    var street = addressComponents.addressLine1;
+    var city = addressComponents.city;
+    var state = addressComponents.postalCode;
+    var country = addressComponents.country;
+    var location = document.getElementById('location');
+    localStorage.setItem("location", location.value);
+    localStorage.setItem("city", city);
+  }
+  $('#map').locationpicker({
+    radius: 0,
+    inputBinding: {
+      locationNameInput: $('#location')
+    },
+    enableAutocomplete: true,
+    onchanged: function(currentLocation, radius, isMarkerDropped) {
+      var addressComponents = $(this).locationpicker('map').location.addressComponents;
+      addressUpdated(addressComponents);
+    },
+    oninitialized: function(component) {
+      var addressComponents = $(component).locationpicker('map').location.addressComponents;
+      addressUpdated(addressComponents);
+      localStorage.setItem("people", 1);
+    }
+  });
+</script>
+
+<script>
+  function personsChanged() {
+    var nrPeople = document.getElementById("people").value;
+    localStorage.setItem("people", nrPeople);
+  }
+</script>

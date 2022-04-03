@@ -1,14 +1,247 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿/*meniu */
+
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+
+* { -webkit-tap-highlight-color: transparent; }
+
+.grid {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.grid-search {
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
+}
+
+.grid-content { grid-column: 2/span 1; }
+
+.logo {
+    float: left;
+    position: relative;
+    transform: translateY(50%);
+}
+
+.map {
+    height: 50vh;
+    width: 100%;
+}
+
+.submit-button {
+    grid-column: 2/span 1;
+    margin-top: 2vh;
+    width: 100%;
+}
+
+.wrapper { min-height: 94vh; }
+
+input,
+select {
+    border: 2px solid black;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    caret-color: transparent;
+    color: black;
+    font-size: large;
+    font-weight: bold;
+    grid-row: 1/span 1;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    outline-color: transparent;
+    outline-width: 0;
+    padding: 1vh 0 1vh 0;
+    text-align: center;
+    width: 100%;
+}
+
+input:focus, select:focus, input:active, select:active {
+     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+input::placeholder {
+    color: black;
+    text-align: center;
+}
+
+input:hover { background: #ddd; }
+
+.location-input {
+    background: white;
+    border-radius: 0;
+    caret-color: auto;
+}
+
+.date-input {
+    background: white;
+    border-radius: 0;
+}
+
+.people-input {
+    background: white;
+    border-radius: 0;
+    caret-color: auto;
+}
+
+[type="date"] { background: #f1f1f1 url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat; }
+
+[type="date"]::-webkit-inner-spin-button { display: none; }
+
+[type="date"]::-webkit-calendar-picker-indicator { opacity: 0; }
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 800;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+header {
+    background: #003580;
+    z-index: 100;
+}
+
+header::after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+nav {
+    float: right;
+    grid-column: 2/span 1;
+    text-align: right;
+}
+
+nav ul {
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 20px;
+    padding-bottom: max(1vh, 1rem);
+    padding-top: max(1vh, 1rem);
+    position: relative;
+}
+
+nav li.right { float: right; }
+
+nav a {
+    color: white;
+    font-size: max(1vh, 1rem);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: orange;
+    text-decoration: none;
+}
+
+nav a::before {
+    background-color: orange;
+    content: '';
+    display: block;
+    height: 10%;
+    position: absolute;
+    top: 0;
+    transition: all ease-in-out 250ms;
+    width: 0%;
+}
+
+.image-link::before {
+    background-color: transparent;
+    content: '';
+    display: block;
+    height: 10%;
+    position: absolute;
+    top: 0;
+    transition: none;
+    width: 0%;
+}
+
+nav a:hover::before { width: 100%; }
+
+footer {
+    background: #003580;
+    color: white;
+    height: 100%;
+    left: 0px;
+    min-height: 6vh;
+    right: 0px;
+    width: 100vw;
+}
+
+.footer-text {
+    min-height: 6vh;
+    padding-top: 1.5vh;
+    text-align: center;
+}
+
+@media screen and (max-width: 1400px) {
+    .grid { grid-template-columns: 4% 92% 4%; }
+
+    header {
+        position: sticky;
+        top: 0;
+        width: 100vw;
+    }
+
+    nav li {
+        margin-left: 0px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .grid-search {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 50% 50%;
+    }
+
+    .location-input {
+        caret-color: auto;
+        grid-column: 1/span 1;
+        grid-row: 2/span 1;
+    }
+
+    .date-input {
+        align-items: flex-start;
+        grid-column: 1/span 2;
+        grid-row: 1/span 1;
+        margin-top: 1vh;
+    }
+
+    .people-input {
+        grid-column: 2/span 1;
+        grid-row: 2/span 1;
+        height: 100%;
+        margin: 0%;
+        padding: 0%;
+    }
+
+    .map { margin-top: 1vh; }
+
+    input {
+        box-sizing: border-box;
+        margin: 0%;
+    }
+}
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+/*a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-}
+}*/
 
 /* Provide sufficient contrast against white background */
-a {
+/*a {
   color: #0366d6;
 }
 
@@ -22,11 +255,11 @@ a {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
-}
+}*/
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
+/*html {
   font-size: 14px;
 }
 @media (min-width: 768px) {
@@ -49,23 +282,23 @@ html {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
-}
+}*/
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
+/*html {
   position: relative;
   min-height: 100%;
 }
 
-body {
+body {*/
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  /*margin-bottom: 60px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
-}
+  line-height: 60px;*/ /* Vertically center the text there */
+/*}*/

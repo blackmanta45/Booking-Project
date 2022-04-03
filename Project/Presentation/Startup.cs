@@ -4,10 +4,8 @@ using Core;
 using Core.Settings;
 using Infrastructure;
 using Infrastructure.Data;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +25,9 @@ namespace Presentation
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddOptions();
 
             services.Configure<AppSettings>(this.Configuration.GetSection(nameof(AppSettings)));
@@ -38,9 +39,6 @@ namespace Presentation
             services.AddApplicationDependencies();
             services.AddCoreDependencies();
             services.AddInfrastructureDependencies();
-
-            services.AddControllersWithViews();
-            services.AddRazorPages();
 
             services.AddSwaggerGen(c =>
             {
