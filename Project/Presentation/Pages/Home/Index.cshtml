@@ -4,21 +4,24 @@
 @using Core.Common.Enums;
 @using Presentation.Models.Home;
 @{
+    ViewData["Title"] = "Booking";
 }
 
 <form method="post">
     <div class="grid-search">
-        <input class="form-control date-input" placeholder="Select period" type="text" name="datefilter" value="" id="datefilter" />
-        <input class="form-control location-input" placeholder="Select location" type="text" name="location" value="" id="location" />
-        <select 
-            name="people" 
-            id="people" 
+        <input class="form-control date-input" placeholder="Select period" type="text" name="datefilter" value="" id="datefilter" autocomplete="off" required asp-for="ViewModel.DateFilter"/>
+        <input class="form-control location-input" placeholder="Select location" type="text" name="location" value="" id="location" required asp-for="ViewModel.Location"/>
+        <input id="latitude" type="hidden" value="" name="latitude">
+        <input id="longitude" type="hidden" value="" name="longitude">
+        <select
+            name="people"
+            id="people"
 
-            asp-for="ViewModel.People" 
+            asp-for="ViewModel.People"
             asp-items=@(Html.GetEnumSelectList<AvailableRoomSize>())
 
-            class="form-control people-input" 
-            placeholder="Select people" 
+            class="form-control people-input"
+            placeholder="Select people"
             onchange="personsChanged()">
         </select>
     </div>
@@ -28,21 +31,24 @@
 
 </form>
 
+    
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
 <script type="text/javascript">
   $(function() {
     var datepickeropen = false;
     $('input[name="datefilter"]').daterangepicker({
       autoUpdateInput: false,
+      minDate: new Date(),
       locale: {
         cancelLabel: 'Clear'
       }
     });
 
     $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-      localStorage.setItem("picked-date", $(this).get()[0].value);
-      localStorage.setItem("start-date", picker.startDate);
-      localStorage.setItem("end-date", picker.endDate);
+      $(this).val((picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY')).toString());
     });
 
     $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
@@ -98,8 +104,14 @@
     var state = addressComponents.postalCode;
     var country = addressComponents.country;
     var location = document.getElementById('location');
-    localStorage.setItem("location", location.value);
-    localStorage.setItem("city", city);
+  }
+
+  function update(element) {
+      var location = element.locationpicker('map').location;
+      addressUpdated(location.addressComponents);
+      
+      $('#latitude')[0].value = location.latitude;
+      $('#longitude')[0].value = location.longitude;
   }
   $('#map').locationpicker({
     radius: 0,
@@ -108,20 +120,10 @@
     },
     enableAutocomplete: true,
     onchanged: function(currentLocation, radius, isMarkerDropped) {
-      var addressComponents = $(this).locationpicker('map').location.addressComponents;
-      addressUpdated(addressComponents);
+      update($(this));
     },
     oninitialized: function(component) {
-      var addressComponents = $(component).locationpicker('map').location.addressComponents;
-      addressUpdated(addressComponents);
-      localStorage.setItem("people", 1);
+      update($(component));
     }
   });
-</script>
-
-<script>
-  function personsChanged() {
-    var nrPeople = document.getElementById("people").value;
-    localStorage.setItem("people", nrPeople);
-  }
 </script>
