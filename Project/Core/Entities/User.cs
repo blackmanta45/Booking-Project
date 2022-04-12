@@ -20,9 +20,12 @@ namespace Core.Entities
         public DateTime DateOfBirth { get; set; }
 
         [Required]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
         [Required]
+        [MaxLength(10)]
+        [MinLength(10)]
         public string Phone { get; set; }
 
         [Required]

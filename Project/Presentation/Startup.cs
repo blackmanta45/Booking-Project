@@ -25,12 +25,12 @@ namespace Presentation
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSettings>(this.Configuration.GetSection(nameof(AppSettings)));
+
             services.AddMvc();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddOptions();
-
-            services.Configure<AppSettings>(this.Configuration.GetSection(nameof(AppSettings)));
 
             var connection = this.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>().DbConnectionString;
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection,

@@ -4,5 +4,6 @@
     {
         public string Secret { get; set; }
         public string DbConnectionString { get; set; }
+        public string MigrationAssembly { get; set; }
     }
 }
