@@ -8,7 +8,7 @@ namespace Presentation.Pages.Home
     public class IndexPageModel : PageModel
     {
         [BindProperty]
-        public IndexViewModel ViewModel { get; set; } = new();
+        public HomeViewModel ViewModel { get; set; } = new();
         
         public async Task<IActionResult> OnGetAsync()
         {

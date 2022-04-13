@@ -13,6 +13,8 @@
         <input class="form-control location-input" placeholder="Select location" type="text" name="location" value="" id="location" required asp-for="ViewModel.Location"/>
         <input id="latitude" type="hidden" value="" name="latitude">
         <input id="longitude" type="hidden" value="" name="longitude">
+        <input id="city" type="hidden" value="" name="city">
+        <input id="country" type="hidden" value="" name="country">
         <select
             name="people"
             id="people"
@@ -48,7 +50,7 @@
     });
 
     $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val((picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY')).toString());
+      $(this).val((picker.startDate.format('MM/DD/YYYY') + '-' + picker.endDate.format('MM/DD/YYYY')).toString());
     });
 
     $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
@@ -103,7 +105,9 @@
     var city = addressComponents.city;
     var state = addressComponents.postalCode;
     var country = addressComponents.country;
-    var location = document.getElementById('location');
+
+    $('#city')[0].value = city;
+    $('#country')[0].value = country;
   }
 
   function update(element) {
