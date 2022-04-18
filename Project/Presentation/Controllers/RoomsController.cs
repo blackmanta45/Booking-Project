@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -54,16 +55,14 @@ namespace Presentation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Amount,Id,IsDeleted,CreatedAt,ModifiedAt")] Room room)
+        public async Task<IActionResult> Create([Bind("Amount,IsDeleted")] Room room)
         {
-            if (ModelState.IsValid)
-            {
-                room.Id = Guid.NewGuid();
-                _context.Add(room);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(room);
+            room.Id = Guid.NewGuid();
+            room.Type = await this._context.Set<RoomType>().Where(x => x.People == AvailableRoomSize.Person1 && x.Stars == 2).FirstOrDefaultAsync();
+            room.Hotel = await this._context.Set<Hotel>().FirstOrDefaultAsync();
+            _context.Add(room);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Rooms/Edit/5

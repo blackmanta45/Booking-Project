@@ -17,9 +17,11 @@ namespace Presentation.Pages.Home
 
         public async Task<IActionResult> OnPostAsync()
         {
-            //var a = this.ModelState;
-
-            //var b = this.PageContext;
+            if (this.ModelState.IsValid)
+            {
+                return this.RedirectToPage("../HotelList/HotelListIndex", new {ViewModel.StartDate, ViewModel.EndDate, ViewModel.Latitude, ViewModel.Longitude, ViewModel.City, ViewModel.Country, ViewModel.People});
+                //return this.RedirectToPage($"/HotelList/HotelListIndex/{ViewModel.StartDate}/{ViewModel.EndDate}/{ViewModel.Latitude}/{ViewModel.Longitude}/{ViewModel.City}/{ViewModel.Country}/{ViewModel.People}");
+            }
 
             return this.Page();
         }

@@ -4,6 +4,7 @@ namespace Core.Common.Enums
 {
     public enum AvailableRoomSize
     {
+        None = 0,
         [Display(Name = "1 Person")] Person1 = 1,
         [Display(Name = "2 Persons")] Person2 = 2,
         [Display(Name = "3 Persons")] Person3 = 3,

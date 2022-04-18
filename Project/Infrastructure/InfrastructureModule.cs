@@ -10,6 +10,7 @@ namespace Infrastructure
         {
             services.AddScoped<IRoomPriceRepository, RoomPriceRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IHotelRepository, HotelRepository>();
 
             return services;
         }

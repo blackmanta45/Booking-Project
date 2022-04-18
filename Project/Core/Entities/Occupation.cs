@@ -10,9 +10,9 @@ namespace Core.Entities
     {
         [Required]
         public DateTime Date { get; set; }
-        
+
         [Required]
-        public Hotel Hotel { get; set; }
+        public Room Room { get; set; }
 
         public User CreatedBy { get; set; }
         public User ModifiedBy { get; set; }

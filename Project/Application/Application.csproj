@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandHandlers\" />
-    <Folder Include="Commands\" />
-    <Folder Include="QueryHandlers\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Queries\" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DisplayModels\" />
   </ItemGroup>
 
 </Project>

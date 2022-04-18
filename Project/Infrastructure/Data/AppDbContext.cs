@@ -33,11 +33,15 @@ public class AppDbContext : DbContext
 
         modified.ForEach(e =>
         {
-            e.Property(x => x.ModifiedAt).CurrentValue = DateTime.UtcNow;
+            e.Property(x => x.ModifiedAt).CurrentValue = DateTime.Now;
         });
 
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.SeedRoomTypes();
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.SeedRoomTypes();
+    }
 }

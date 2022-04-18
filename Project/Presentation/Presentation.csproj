@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\HotelListIndex.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="C1.Web.Mvc" Version="4.5.20221.333" />
     <PackageReference Include="C1.Web.Mvc.FlexViewer" Version="4.5.20221.333" />

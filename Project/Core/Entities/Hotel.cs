@@ -15,6 +15,9 @@ namespace Core.Entities
         public string Description { get; set; }
 
         [Required]
+        public string ShortDescription { get; set; }
+
+        [Required]
         public decimal Latitude { get; set; }
 
         [Required]

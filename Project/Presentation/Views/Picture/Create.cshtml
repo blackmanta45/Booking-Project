@@ -1,0 +1,28 @@
+﻿@using Core.Entities
+@model Core.Entities.Room
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Room</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Upload" 
+              asp-controller="Picture" 
+              method="post" 
+              enctype="multipart/form-data">
+            <input type="file" id="file1" 
+                   name="file1" 
+                   multiple="multiple" />
+            <button type="submit">Upload File(s)</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
