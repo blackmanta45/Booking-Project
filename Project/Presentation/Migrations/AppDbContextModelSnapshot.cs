@@ -104,7 +104,8 @@ namespace Presentation.Migrations
 
                     b.Property<string>("ShortDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
@@ -369,210 +370,210 @@ namespace Presentation.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7229b300-3b67-4471-8946-d9e6a05002c6"),
+                            Id = new Guid("d254745f-af67-4a42-8b3a-a676a1990f23"),
                             DefaultPrice = 100m,
                             People = 1,
                             Stars = 1
                         },
                         new
                         {
-                            Id = new Guid("7fa8eedc-351f-4a26-b1df-1c4737e2277a"),
+                            Id = new Guid("f805858a-e5b6-44db-8eed-28214c5cc097"),
                             DefaultPrice = 100m,
                             People = 2,
                             Stars = 1
                         },
                         new
                         {
-                            Id = new Guid("157cd66b-4b67-4baf-9dc0-4a62ae3a039e"),
+                            Id = new Guid("6042f260-5aee-4ec8-9500-11badece9236"),
                             DefaultPrice = 140m,
                             People = 3,
                             Stars = 1
                         },
                         new
                         {
-                            Id = new Guid("3e2e1927-0c0d-4bb3-9f57-ed502c4e288b"),
+                            Id = new Guid("72ae754e-fa14-4a5b-9361-d8107f239082"),
                             DefaultPrice = 175m,
                             People = 4,
                             Stars = 1
                         },
                         new
                         {
-                            Id = new Guid("1e03f289-2795-4ca4-8a89-9a457eb4ce52"),
+                            Id = new Guid("3ad827e5-198a-40b7-811f-1ce64d3c8ebf"),
                             DefaultPrice = 250m,
                             People = 5,
                             Stars = 1
                         },
                         new
                         {
-                            Id = new Guid("b1a34bbf-b1dd-4e50-ac9d-6d9ecaab6113"),
+                            Id = new Guid("abb39912-da95-4a90-8c4f-5fb006ead2a1"),
                             DefaultPrice = 300m,
                             People = 6,
                             Stars = 1
                         },
                         new
                         {
-                            Id = new Guid("1e410d19-8732-4a83-ac71-7127b8c00ea8"),
+                            Id = new Guid("d134793c-f031-42e1-a013-00aec8883df9"),
                             DefaultPrice = 200m,
                             People = 1,
                             Stars = 2
                         },
                         new
                         {
-                            Id = new Guid("3385489d-c0f2-4b21-8b21-2baaa8ada757"),
+                            Id = new Guid("b89c7fdb-64c4-4e33-91fa-f5c7e6fa5834"),
                             DefaultPrice = 200m,
                             People = 2,
                             Stars = 2
                         },
                         new
                         {
-                            Id = new Guid("e076bdc1-df60-4c95-8cb3-0416975da5d0"),
+                            Id = new Guid("a7a39eb9-2857-49f5-a682-42ac8c2c4292"),
                             DefaultPrice = 240m,
                             People = 3,
                             Stars = 2
                         },
                         new
                         {
-                            Id = new Guid("8f9ca21d-aba9-4034-a479-2c850764eef1"),
+                            Id = new Guid("da389746-ff89-40dc-9201-88004508c3c5"),
                             DefaultPrice = 275m,
                             People = 4,
                             Stars = 2
                         },
                         new
                         {
-                            Id = new Guid("a382e0b0-1e17-47c4-921b-39968384824d"),
+                            Id = new Guid("041d0961-3007-46f4-8413-56f25fef7b37"),
                             DefaultPrice = 350m,
                             People = 5,
                             Stars = 2
                         },
                         new
                         {
-                            Id = new Guid("2b7578db-8d6e-4be4-8b47-6475e3cbbd1b"),
+                            Id = new Guid("e81b7d40-f52a-4f92-b4df-3ef19f39f6d7"),
                             DefaultPrice = 400m,
                             People = 6,
                             Stars = 2
                         },
                         new
                         {
-                            Id = new Guid("36869323-fc5e-46bf-b87b-105d9d1225c7"),
+                            Id = new Guid("a6c5fd97-9da3-4b8b-9a22-deebfd9cdcc1"),
                             DefaultPrice = 300m,
                             People = 1,
                             Stars = 3
                         },
                         new
                         {
-                            Id = new Guid("37c0ce04-0184-48ea-b1f4-b5a92bc4353a"),
+                            Id = new Guid("b374f9cc-c678-4766-93f4-5564d49a1c09"),
                             DefaultPrice = 300m,
                             People = 2,
                             Stars = 3
                         },
                         new
                         {
-                            Id = new Guid("3f38c435-c5e5-41e2-952f-4fb6884c6694"),
+                            Id = new Guid("b799635f-b1e7-44dd-a2d3-447adb86b19d"),
                             DefaultPrice = 340m,
                             People = 3,
                             Stars = 3
                         },
                         new
                         {
-                            Id = new Guid("73caeb6a-6e67-4ab9-a36b-9827567168f5"),
+                            Id = new Guid("96ebf603-bf3a-498b-8d22-61239e1be33e"),
                             DefaultPrice = 375m,
                             People = 4,
                             Stars = 3
                         },
                         new
                         {
-                            Id = new Guid("1ee45d85-2d5f-47ab-aa92-50f091c1ea74"),
+                            Id = new Guid("30cd9926-edd8-4542-a8c1-e065b07dcb0a"),
                             DefaultPrice = 450m,
                             People = 5,
                             Stars = 3
                         },
                         new
                         {
-                            Id = new Guid("8f4b2ec0-3249-46f6-8950-e1c4ea91b0c0"),
+                            Id = new Guid("3c243dd1-a0e7-431f-b4fb-9ac5ea5b61bb"),
                             DefaultPrice = 500m,
                             People = 6,
                             Stars = 3
                         },
                         new
                         {
-                            Id = new Guid("a595ff56-72d6-40cd-b24b-febc963c6040"),
+                            Id = new Guid("9bb72415-62d6-4fc6-8ea7-b75c4bdd2f16"),
                             DefaultPrice = 400m,
                             People = 1,
                             Stars = 4
                         },
                         new
                         {
-                            Id = new Guid("2e5c85d9-753e-4d48-a6e2-c2b17ad97870"),
+                            Id = new Guid("10c1eecc-c70d-4503-b958-07bab7526f2c"),
                             DefaultPrice = 400m,
                             People = 2,
                             Stars = 4
                         },
                         new
                         {
-                            Id = new Guid("c82a5eb3-e634-4b74-94f1-08126890da96"),
+                            Id = new Guid("7d5eb0b9-8100-46dc-a622-d2d2fc650188"),
                             DefaultPrice = 440m,
                             People = 3,
                             Stars = 4
                         },
                         new
                         {
-                            Id = new Guid("e1383a2a-0437-4899-9ff7-3186822efd84"),
+                            Id = new Guid("b4693c09-8512-47e6-96d9-e27a476fd351"),
                             DefaultPrice = 475m,
                             People = 4,
                             Stars = 4
                         },
                         new
                         {
-                            Id = new Guid("7ff63d1f-dcc7-4b92-af2b-f4a44ddedabf"),
+                            Id = new Guid("79ae0a49-0cb2-4786-85c7-b91fe5adb786"),
                             DefaultPrice = 550m,
                             People = 5,
                             Stars = 4
                         },
                         new
                         {
-                            Id = new Guid("08b9f148-6599-4848-8486-6b28cde90389"),
+                            Id = new Guid("bf5bb3cf-beb8-4dc6-848d-88c84d8765af"),
                             DefaultPrice = 600m,
                             People = 6,
                             Stars = 4
                         },
                         new
                         {
-                            Id = new Guid("96b4066f-c758-4655-97ef-2bb0f81a780a"),
+                            Id = new Guid("20491b51-d345-4bf8-95d3-cad141927df1"),
                             DefaultPrice = 500m,
                             People = 1,
                             Stars = 5
                         },
                         new
                         {
-                            Id = new Guid("3345ceee-4d0e-445e-ab4d-d9de860edb9a"),
+                            Id = new Guid("f92c7814-5a71-4f79-86b6-214fa1a45ad3"),
                             DefaultPrice = 500m,
                             People = 2,
                             Stars = 5
                         },
                         new
                         {
-                            Id = new Guid("4b0cbd97-7ea8-4970-8881-aad34c292fff"),
+                            Id = new Guid("c09480d3-60ba-45c5-9ed9-263210ef4038"),
                             DefaultPrice = 540m,
                             People = 3,
                             Stars = 5
                         },
                         new
                         {
-                            Id = new Guid("c374f512-ea45-4547-aa8f-c2a7ec975c29"),
+                            Id = new Guid("bbdeeb89-c879-40e0-81c6-c9c6559ef5e9"),
                             DefaultPrice = 575m,
                             People = 4,
                             Stars = 5
                         },
                         new
                         {
-                            Id = new Guid("b6655299-1d7c-42ca-87ca-730579fda317"),
+                            Id = new Guid("4733b2d2-26aa-450d-a2e5-92aa6af1fba9"),
                             DefaultPrice = 650m,
                             People = 5,
                             Stars = 5
                         },
                         new
                         {
-                            Id = new Guid("e11cee64-0e8c-42ac-a661-319021efef4c"),
+                            Id = new Guid("4db81cc8-5aec-4a5a-82f3-bfdf48c5cbe8"),
                             DefaultPrice = 700m,
                             People = 6,
                             Stars = 5

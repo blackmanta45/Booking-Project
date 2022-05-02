@@ -43,5 +43,7 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.SeedRoomTypes();
+        modelBuilder.SeedUser();
+        modelBuilder.SeedHotels();
     }
 }

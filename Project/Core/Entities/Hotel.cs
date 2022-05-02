@@ -15,6 +15,7 @@ namespace Core.Entities
         public string Description { get; set; }
 
         [Required]
+        [StringLength(200)]
         public string ShortDescription { get; set; }
 
         [Required]

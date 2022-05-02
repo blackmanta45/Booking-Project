@@ -33,11 +33,30 @@ namespace Infrastructure.Repositories
                 .Where(z => !z.IsDeleted).ToListAsync();
             foreach (var hotel in hotels)
             {
-                hotel.Rooms  = hotel.Rooms.Where(x => !hotel.Occupations.Where(y => y.Room == x).Any(y => y.Date >= startDate && y.Date <= endDate)).ToList();
+                hotel.Rooms  = hotel.Rooms
+                    .Where(x => !hotel.Occupations
+                        .Where(y => y.Room == x)
+                        .Any(y => y.Date >= startDate && y.Date <= endDate) && 
+                        x.Type.People == people)
+                    .ToList();
             }
 
-            hotels = hotels.Where(x => x.Rooms.Any()).ToList();
-            return hotels;
+            return hotels.Where(x => x.Rooms.Any()).ToList();
+        }
+
+        public async Task<Hotel> GetHotelAsync(Guid id)
+        {
+            var hotel = await this.GetTable()
+                .Include(x => x.Rooms)
+                    .ThenInclude(y => y.Type)
+                .Include(x => x.Occupations)
+                    .ThenInclude(y => y.Room)
+                .Include(x => x.Pictures)
+                    .ThenInclude(y => y.Picture)
+                .Include(x => x.Reviews)
+                    .ThenInclude(y => y.User)
+                .Where(z => z.Id == id).FirstOrDefaultAsync();
+            return hotel;
         }
     }
 }

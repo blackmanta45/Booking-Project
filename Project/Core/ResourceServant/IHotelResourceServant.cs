@@ -1,13 +1,18 @@
-﻿using Core.DisplayModels;
+﻿using System;
+using Core.DisplayModels;
 using Core.Entities;
 
 namespace Core.ResourceServant
 {
     public interface IHotelResourceServant
     {
-        HotelDisplayModel ToDisplayModel(
+        HotelListDisplayModel ToListDisplayModel(
             Hotel hotel,
             string country,
-            string city);
+            string city,
+            DateTime start,
+            DateTime end);
+
+        HotelDetailsDisplayModel ToDetailsDisplayModel(Hotel hotel);
     }
 }

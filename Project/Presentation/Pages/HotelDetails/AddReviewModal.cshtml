@@ -1,0 +1,21 @@
+﻿@model Core.Entities.Review
+@{
+
+}
+
+<textarea id="description-modal" class="form-control" placeholder="Input your description here" name="description" rows="6" cols="10" wrap="soft" value="" required asp-for="Description"> </textarea>
+<select
+    name="Value"
+    id="rating-modal"
+
+    asp-for="Value"
+
+    class="form-control"
+    value="1"
+    placeholder="Rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>

@@ -27,7 +27,8 @@ namespace Presentation
         {
             services.Configure<AppSettings>(this.Configuration.GetSection(nameof(AppSettings)));
 
-            services.AddMvc();
+            services.AddMvc();    
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddOptions();

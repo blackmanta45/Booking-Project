@@ -3,7 +3,7 @@ using Core.Repositories.Base;
 
 namespace Core.Repositories
 {
-    public interface IRoomRepository: IRepository<Room>
+    public interface IRoomRepository : IRepository<Room>
     {
     }
 }

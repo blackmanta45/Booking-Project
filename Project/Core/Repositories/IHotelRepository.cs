@@ -13,5 +13,7 @@ namespace Core.Repositories
             DateTime startDate,
             DateTime endDate,
             AvailableRoomSize people);
+
+        Task<Hotel> GetHotelAsync(Guid id);
     }
 }

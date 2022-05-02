@@ -11,6 +11,8 @@ namespace Application
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
             services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<IReviewService, ReviewService>();
+
             services.AddScoped<IHotelResourceServant, HotelResourceServant>();
 
             return services;

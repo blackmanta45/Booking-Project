@@ -14,5 +14,15 @@ namespace Core.Services
             decimal latitude,
             decimal longitude,
             AvailableRoomSize people);
+
+        Task<Hotel> GetHotelDetails(
+            Guid id,
+            AvailableRoomSize people);
+
+        Task Reserve(
+            Hotel hotel,
+            AvailableRoomSize people,
+            DateTime start,
+            DateTime end);
     }
 }

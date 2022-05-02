@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\HotelDetailsIndex.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\HotelDetailsIndex.css" />
     <None Include="wwwroot\css\HotelListIndex.css" />
   </ItemGroup>
 

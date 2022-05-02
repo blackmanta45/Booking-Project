@@ -27,7 +27,7 @@ namespace Presentation.Pages.HotelList
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public AvailableRoomSize People { get; set; }
-        public List<HotelDisplayModel> Hotels { get; set; }
+        public List<HotelListDisplayModel> Hotels { get; set; }
 
         public async Task<IActionResult> OnGetAsync(
             DateTime startDate,
@@ -40,7 +40,12 @@ namespace Presentation.Pages.HotelList
         {
             this.City = city;
             this.Country = country;
+            this.Start = startDate;
+            this.End = endDate;
             this.People = people;
+
+            if (string.IsNullOrEmpty(this.City) || string.IsNullOrEmpty(this.Country))
+                return this.RedirectToPage("/Home/Index");
 
             var hotels = await this.hotelService.GetFilteredHotels(
                 startDate,
@@ -49,7 +54,7 @@ namespace Presentation.Pages.HotelList
                 longitude,
                 people);
 
-            this.Hotels = hotels.Select(x => this.hotelResourceServant.ToDisplayModel(x, this.Country, this.City)).ToList();
+            this.Hotels = hotels.Select(x => this.hotelResourceServant.ToListDisplayModel(x, this.Country, this.City, this.Start, this.End)).ToList();
             return this.Page();
         }
 

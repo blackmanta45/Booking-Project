@@ -8,10 +8,14 @@ namespace Application.Services
     public class HotelService : IHotelService
     {
         private readonly IHotelRepository hotelRepository;
+        private readonly IOccupationRepository occupationRepository;
 
-        public HotelService(IHotelRepository hotelRepository)
+        public HotelService(
+            IHotelRepository hotelRepository,
+            IOccupationRepository occupationRepository)
         {
             this.hotelRepository = hotelRepository;
+            this.occupationRepository = occupationRepository;
         }
 
         public async Task<List<Hotel>> GetFilteredHotels(
@@ -31,6 +35,32 @@ namespace Application.Services
                 (double)longitude,
                 (double)x.Latitude,
                 (double)x.Longitude) <= 15).ToList();
+        }
+
+        public async Task<Hotel> GetHotelDetails(
+            Guid id,
+            AvailableRoomSize people)
+        {
+            var hotel = await this.hotelRepository.GetHotelAsync(id);
+            hotel.Rooms = hotel.Rooms.Where(x => x.Type.People == people).ToList();
+            hotel.Reviews = hotel.Reviews.OrderByDescending(x => x.Date).ToList();
+            return hotel;
+        }
+
+        public async Task Reserve(
+            Hotel hotel,
+            AvailableRoomSize people,
+            DateTime start,
+            DateTime end)
+        {
+            end = end.AddHours(1);
+            var occupations = await this.occupationRepository.GetOccupationsForHotelAndPeriod(hotel, people, start, end);
+            var room = hotel.Rooms.FirstOrDefault(x => occupations.All(y => y.Room != x));
+            while (start < end)
+            {
+                await this.occupationRepository.Reserve(room, start);
+                start = start.AddDays(1);
+            }
         }
 
         private double Calculate(

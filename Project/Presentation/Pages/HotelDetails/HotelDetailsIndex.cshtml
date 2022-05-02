@@ -1,0 +1,233 @@
+﻿@page
+@using Newtonsoft.Json
+@model Presentation.Pages.HotelDetails.HotelDetailsIndexModel
+@{
+    ViewData["Title"] = "Booking";
+}
+
+@section Styles{
+    <link href="@Url.Content("~/css/HotelDetailsIndex.css")" rel="stylesheet" type="text/css"/>
+}
+
+<div class="container">
+    <div class="card">
+        <div class="container-fluid">
+            <div class="wrapper-hotel row">
+                <div class="preview col-md">
+                    <div class="slideshow-container">
+                        @for (var i = 0; i < Model.HotelDetailsDisplayModel.Pictures.Count; i++)
+                        {
+                            <div class="mySlides fade-slider">
+                                <div class="numbertext"> @((i + 1) / 10)</div>
+                                <img src=@Model.HotelDetailsDisplayModel.Pictures.ElementAt(i) style="height: 30vh; object-fit: cover; width: 50vw;">
+                                <div class="text">uwu</div>
+                            </div>
+                        }
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        <br>
+                    </div>
+                    <div style="text-align: center">
+                        @for (var i = 0; i < Model.HotelDetailsDisplayModel.Pictures.Count; i++)
+                        {
+                            <span class="dot" onclick="currentSlide(@(i + 1))"></span>
+                        }
+                    </div>
+                </div>
+                <div class="details col-md">
+                    <h3 class="product-title">@Model.HotelDetailsDisplayModel.Name</h3>
+                    <div class="rating">
+                        <div class="stars">
+                            @for (var i = 0; i < 5; i++)
+                            {
+                                <span class="fa fa-star @(Model.HotelDetailsDisplayModel.Rating > i ? "checked" : "")"></span>
+                            }
+                        </div>
+                        <span class="review-no">@Model.HotelDetailsDisplayModel.Reviews.Count reviews</span>
+                    </div>
+                    <p class="product-description">@Model.HotelDetailsDisplayModel.Description</p>
+                    <h4 class="price">Current Price <span>@Model.HotelDetailsDisplayModel.Price</span></h4>
+                    <p class="vote"><strong>@(Model.HotelDetailsDisplayModel.EnjoyPercentage)%</strong> of buyers enjoyed this product!</p>
+                    <p class="current-date">@Model.Start.ToString("dd/MM/yyyy") - @Model.End.ToString("dd/MM/yyyy")</p>
+                    <div class="action">
+                        <form asp-page-handler="Reserve" method="post">
+                            <button id="reservebtn" class="add-to-cart btn btn-default" type="submit">Reserve</button>
+                            <a class="like btn btn-default" id="addreview">Add Review</a>
+                            <input type="hidden" name="hotelId" value="@Model.Hotel.Id"/>
+                            <input type="hidden" name="people" value="@Model.People"/>
+                            <input type="hidden" name="start" value="@Model.Start"/>
+                            <input type="hidden" name="end" value="@Model.End"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.AntiForgeryToken()
+
+
+<div id="partialModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Review</h5>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button id="add-review-submit-btn" type="button" class="btn btn-primary">Add</button>
+                <button id="modal-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="overflow-anchor: none;">
+    @foreach (var review in Model.HotelDetailsDisplayModel.Reviews)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-image">
+                            <a href="#" type="button" class="btn">
+                                <img src=@review.User.Picture alt="user-image"/>
+                            </a>
+                        </div>
+                        <div class="card-info">
+                            <hr>
+                            <div class="content">
+                                <p>@review.Description</p>
+                                <div class="name">
+                                    <p>@review.User.Name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $("#addreview").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "HotelDetailsIndex?handler=AddReview",
+                contentType: "application/json; charset=utf-8",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                data: { hotelId: '@Model.Hotel.Id' },
+                success: function(response) {
+                    $("#partialModal").find(".modal-body").html(response);
+                    $("#partialModal").show();
+                },
+                error: function(response) {
+                    console.log(response);
+                    alert(response.responseText);
+                }
+            });
+        });
+    });
+    $(function() {
+        $("#modal-close-btn").click(function() {
+            $("#partialModal").hide();
+        });
+    });
+    $(function() {
+        $("#add-review-submit-btn").click(function() {
+            var description = $('#description-modal').val();
+            var rating = $('#rating-modal').val();
+            $.ajax({
+                type: "POST",
+                url: "HotelDetailsIndex?handler=AddReviewSubmit",
+                data: {
+                    description: description.toString(),
+                    rating: rating,
+                    hotelId: '@Model.Hotel.Id',
+                    startDate: @Html.Raw(JsonConvert.SerializeObject(Model.Start)),
+                    endDate: @Html.Raw(JsonConvert.SerializeObject(Model.End)),
+                    people: '@Model.People'
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: function(response) {
+                    console.log(response);
+                    $("#partialModal").hide();
+                    location.reload();
+                },
+                error: function(response) {
+                    console.log(response);
+                    alert(response.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
+
+<script>
+    /* From img to background */
+    bg_image_replace(".card-image a img", ".card-image a");
+
+    function bg_image_replace(image, parent) {
+        $(image).each(function(index, elem) {
+
+            var src = $(elem).attr("src"),
+                $parent = $(elem).closest(parent);
+
+            $parent.css("background-image", "url(" + src + ")");
+        });
+    }
+
+
+    /* Review */
+    $('.card-image').mouseover(function() {
+        $('.card-modal').fadeIn(100).toggleClass('active');
+    }).mouseout(function() {
+        $('.card-modal').fadeOut(100).toggleClass('active');
+    });
+</script>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Common.Enums;
 using Core.Entities;
+using Core.Services;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +13,12 @@ namespace Presentation.Controllers
     public class HotelsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IHotelService hotelService;
 
-        public HotelsController(AppDbContext context)
+        public HotelsController(AppDbContext context, IHotelService hotelService)
         {
             this._context = context;
+            this.hotelService = hotelService;
         }
 
         // GET: Hotels
