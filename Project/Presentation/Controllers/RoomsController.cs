@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Common.Enums;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Core.Entities;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Presentation.Controllers
 {
@@ -17,38 +15,32 @@ namespace Presentation.Controllers
 
         public RoomsController(AppDbContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         // GET: Rooms
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Rooms.ToListAsync());
-        }
+        public async Task<IActionResult> Index() => this.View(await this._context.Rooms.ToListAsync());
 
         // GET: Rooms/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var room = await _context.Rooms
+            var room = await this._context.Rooms
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (room == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(room);
+            return this.View(room);
         }
 
         // GET: Rooms/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => this.View();
 
         // POST: Rooms/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -60,9 +52,9 @@ namespace Presentation.Controllers
             room.Id = Guid.NewGuid();
             room.Type = await this._context.Set<RoomType>().Where(x => x.People == AvailableRoomSize.Person1 && x.Stars == 2).FirstOrDefaultAsync();
             room.Hotel = await this._context.Set<Hotel>().FirstOrDefaultAsync();
-            _context.Add(room);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            this._context.Add(room);
+            await this._context.SaveChangesAsync();
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         // GET: Rooms/Edit/5
@@ -70,15 +62,16 @@ namespace Presentation.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var room = await _context.Rooms.FindAsync(id);
+            var room = await this._context.Rooms.FindAsync(id);
             if (room == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
-            return View(room);
+
+            return this.View(room);
         }
 
         // POST: Rooms/Edit/5
@@ -90,30 +83,30 @@ namespace Presentation.Controllers
         {
             if (id != room.Id)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(room);
-                    await _context.SaveChangesAsync();
+                    this._context.Update(room);
+                    await this._context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoomExists(room.Id))
+                    if (!this.RoomExists(room.Id))
                     {
-                        return NotFound();
+                        return this.NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
+
+                return this.RedirectToAction(nameof(this.Index));
             }
-            return View(room);
+
+            return this.View(room);
         }
 
         // GET: Rooms/Delete/5
@@ -121,33 +114,31 @@ namespace Presentation.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var room = await _context.Rooms
+            var room = await this._context.Rooms
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (room == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(room);
+            return this.View(room);
         }
 
         // POST: Rooms/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var room = await _context.Rooms.FindAsync(id);
-            _context.Rooms.Remove(room);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var room = await this._context.Rooms.FindAsync(id);
+            this._context.Rooms.Remove(room);
+            await this._context.SaveChangesAsync();
+            return this.RedirectToAction(nameof(this.Index));
         }
 
-        private bool RoomExists(Guid id)
-        {
-            return _context.Rooms.Any(e => e.Id == id);
-        }
+        private bool RoomExists(Guid id) => this._context.Rooms.Any(e => e.Id == id);
     }
 }

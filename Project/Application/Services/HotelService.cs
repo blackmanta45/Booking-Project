@@ -30,6 +30,20 @@ namespace Application.Services
                 endDate,
                 people);
 
+            hotels = hotels.Where(x => x.Rooms.Any()).ToList();
+
+            foreach (var hotel in hotels)
+            {
+                var occupations = await this.occupationRepository.GetOccupationsForHotelAndPeriod(hotel, people, startDate, endDate);
+                hotel.Rooms  = hotel.Rooms
+                    .Where(x => !occupations
+                        .Where(y => y.Room == x)
+                        .Any(y => y.Date >= startDate && y.Date <= endDate) && x.Type.People == people)
+                    .ToList();
+            }
+            
+            hotels = hotels.Where(x => x.Rooms.Any()).ToList();
+
             return hotels.Where(x => this.Calculate(
                 (double)latitude,
                 (double)longitude,
@@ -37,13 +51,16 @@ namespace Application.Services
                 (double)x.Longitude) <= 15).ToList();
         }
 
-        public async Task<Hotel> GetHotelDetails(
+        public async Task<Hotel?> GetHotelDetails(
             Guid id,
             AvailableRoomSize people)
         {
             var hotel = await this.hotelRepository.GetHotelAsync(id);
-            hotel.Rooms = hotel.Rooms.Where(x => x.Type.People == people).ToList();
-            hotel.Reviews = hotel.Reviews.OrderByDescending(x => x.Date).ToList();
+            if (hotel is null) 
+                return hotel;
+
+            hotel.Rooms = hotel.Rooms?.Where(x => x.Type.People == people).ToList();
+            hotel.Reviews = hotel.Reviews?.OrderByDescending(x => x.Date).ToList();
             return hotel;
         }
 
@@ -56,6 +73,9 @@ namespace Application.Services
             end = end.AddHours(1);
             var occupations = await this.occupationRepository.GetOccupationsForHotelAndPeriod(hotel, people, start, end);
             var room = hotel.Rooms.FirstOrDefault(x => occupations.All(y => y.Room != x));
+            if (room is null)
+                return;
+
             while (start < end)
             {
                 await this.occupationRepository.Reserve(room, start);

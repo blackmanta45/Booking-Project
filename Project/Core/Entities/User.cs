@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Core.Common.Enums;
-using Core.Entities.Base;
+using Microsoft.AspNetCore.Identity;
 
 namespace Core.Entities
 {
     [Table("User")]
-    public class User : BaseEntity
+    public class User : IdentityUser<Guid>
     {
+        public bool IsDeleted { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime ModifiedAt { get; set; }
+
         [Required]
         public string Name { get; set; }
 
@@ -18,10 +22,6 @@ namespace Core.Entities
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-
-        [Required]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        public string Email { get; set; }
 
         [Required]
         [MaxLength(10)]

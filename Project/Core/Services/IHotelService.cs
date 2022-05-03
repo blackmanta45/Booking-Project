@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Common.Enums;
@@ -15,7 +16,7 @@ namespace Core.Services
             decimal longitude,
             AvailableRoomSize people);
 
-        Task<Hotel> GetHotelDetails(
+        Task<Hotel?> GetHotelDetails(
             Guid id,
             AvailableRoomSize people);
 

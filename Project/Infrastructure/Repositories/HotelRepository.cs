@@ -21,40 +21,25 @@ namespace Infrastructure.Repositories
         public async Task<List<Hotel>> GetFilteredAsync(
             DateTime startDate,
             DateTime endDate,
-            AvailableRoomSize people)
-        {
-            var hotels = await this.GetTable()
+            AvailableRoomSize people) =>
+            await this.GetTable()
                 .Include(x => x.Rooms)
-                    .ThenInclude(y => y.Type)
-                .Include(x => x.Occupations)
-                    .ThenInclude(y => y.Room)
+                .ThenInclude(y => y.Type)
                 .Include(x => x.Pictures)
-                    .ThenInclude(y => y.Picture)
+                .ThenInclude(y => y.Picture)
                 .Where(z => !z.IsDeleted).ToListAsync();
-            foreach (var hotel in hotels)
-            {
-                hotel.Rooms  = hotel.Rooms
-                    .Where(x => !hotel.Occupations
-                        .Where(y => y.Room == x)
-                        .Any(y => y.Date >= startDate && y.Date <= endDate) && 
-                        x.Type.People == people)
-                    .ToList();
-            }
-
-            return hotels.Where(x => x.Rooms.Any()).ToList();
-        }
 
         public async Task<Hotel> GetHotelAsync(Guid id)
         {
             var hotel = await this.GetTable()
                 .Include(x => x.Rooms)
-                    .ThenInclude(y => y.Type)
-                .Include(x => x.Occupations)
-                    .ThenInclude(y => y.Room)
+                .ThenInclude(y => y.Type)
                 .Include(x => x.Pictures)
-                    .ThenInclude(y => y.Picture)
+                .ThenInclude(y => y.Picture)
                 .Include(x => x.Reviews)
-                    .ThenInclude(y => y.User)
+                .ThenInclude(y => y.User)
+                .ThenInclude(z => z.Picture)
+                .ThenInclude(t => t.Picture)
                 .Where(z => z.Id == id).FirstOrDefaultAsync();
             return hotel;
         }

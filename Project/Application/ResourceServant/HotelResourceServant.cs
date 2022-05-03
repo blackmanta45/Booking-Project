@@ -24,13 +24,20 @@ namespace Application.ResourceServant
                 Location = $"{country}, {city}",
                 City = city,
                 Country = country,
-                Picture = ToPicture(hotel.Pictures.FirstOrDefault()?.Picture)
+                Picture = ToPicture(hotel.Pictures.FirstOrDefault()?.Picture),
+                RoomsCount = hotel.Rooms.Count
             };
 
         public HotelDetailsDisplayModel ToDetailsDisplayModel(Hotel hotel)
         {
-            var enjoyPercentage = hotel.Reviews.Count > 0 ? hotel.Reviews.Count(x => x.Value > 3) * 1.0 / hotel.Reviews.Count(x => x.Value <= 3) * 100 : 0;
-            return new()
+            var enjoyPercentage = 100.0;  
+            if(hotel.Reviews.Count > 0)
+            {
+                var happy = hotel.Reviews.Count(x => x.Value > 3) * 1.0;
+                enjoyPercentage = happy / hotel.Reviews.Count * 100;
+            }
+
+            return new HotelDetailsDisplayModel
             {
                 Id = hotel.Id,
                 Name = hotel.Name,

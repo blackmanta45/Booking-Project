@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Core.Entities.Base;
 using Core.Repositories.Base;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Infrastructure.Repositories.Base;
 
 public class Repository<T> : IRepository<T>
-    where T : BaseEntity, new()
+    where T : class, new()
 {
     protected readonly AppDbContext DbContext;
 
@@ -100,7 +97,7 @@ public class Repository<T> : IRepository<T>
     public IQueryable<T> Query(bool eager = false)
     {
         var query = this.DbContext.Set<T>().AsQueryable();
-        if (!eager) 
+        if (!eager)
             return query;
 
         var navigations = this.DbContext.Model.FindEntityType(typeof(T))?
@@ -114,106 +111,106 @@ public class Repository<T> : IRepository<T>
         return query;
     }
 
-    public async Task<int> UpdateAsyncWithAllChildren(T entity)
-    {
-        var navigations = this.DbContext.Model.FindEntityType(typeof(T))?
-            .GetDerivedTypesInclusive()
-            .SelectMany(type => type.GetNavigations())
-            .Distinct();
+    //public async Task<int> UpdateAsyncWithAllChildren(T entity)
+    //{
+    //    var navigations = this.DbContext.Model.FindEntityType(typeof(T))?
+    //        .GetDerivedTypesInclusive()
+    //        .SelectMany(type => type.GetNavigations())
+    //        .Distinct();
 
-        var dbEntity = await this.DbContext.FindAsync<T>(entity.Id);
+    //    var dbEntity = await this.DbContext.FindAsync<T>(entity.Id);
 
-        if (dbEntity == null) 
-            return 0;
+    //    if (dbEntity == null)
+    //        return 0;
 
-        var dbEntry = this.DbContext.Entry(dbEntity);
-        dbEntry.CurrentValues.SetValues(entity);
+    //    var dbEntry = this.DbContext.Entry(dbEntity);
+    //    dbEntry.CurrentValues.SetValues(entity);
 
-        foreach (var property in navigations)
-        {
-            var propertyName = property.Name;
-            var dbItemsEntry = dbEntry.Collection(propertyName);
-            var accessor = dbItemsEntry.Metadata.GetCollectionAccessor();
+    //    foreach (var property in navigations)
+    //    {
+    //        var propertyName = property.Name;
+    //        var dbItemsEntry = dbEntry.Collection(propertyName);
+    //        var accessor = dbItemsEntry.Metadata.GetCollectionAccessor();
 
-            await dbItemsEntry.LoadAsync();
-            if (dbItemsEntry.CurrentValue is null) 
-                continue;
+    //        await dbItemsEntry.LoadAsync();
+    //        if (dbItemsEntry.CurrentValue is null)
+    //            continue;
 
-            var dbItemsMap = ((IEnumerable<BaseEntity>)dbItemsEntry.CurrentValue)
-                .ToDictionary(e => e.Id);
+    //        var dbItemsMap = ((IEnumerable<BaseEntity>)dbItemsEntry.CurrentValue)
+    //            .ToDictionary(e => e.Id);
 
-            if (accessor is not null)
-            {
-                var items = (IEnumerable<BaseEntity>)accessor.GetOrCreate(entity, true);
+    //        if (accessor is not null)
+    //        {
+    //            var items = (IEnumerable<BaseEntity>)accessor.GetOrCreate(entity, true);
 
-                foreach (var item in items)
-                {
-                    if (!dbItemsMap.TryGetValue(item.Id, out var oldItem))
-                    {
-                        accessor.Add(dbEntity, item, true);
-                    }
-                    else
-                    {
-                        this.DbContext.Entry(oldItem).CurrentValues.SetValues(item);
-                        dbItemsMap.Remove(item.Id);
-                    }
-                }
-            }
+    //            foreach (var item in items)
+    //            {
+    //                if (!dbItemsMap.TryGetValue(item.Id, out var oldItem))
+    //                {
+    //                    accessor.Add(dbEntity, item, true);
+    //                }
+    //                else
+    //                {
+    //                    this.DbContext.Entry(oldItem).CurrentValues.SetValues(item);
+    //                    dbItemsMap.Remove(item.Id);
+    //                }
+    //            }
+    //        }
 
-            foreach (var oldItem in dbItemsMap.Values)
-                accessor?.Remove(dbEntity, oldItem);
-        }
+    //        foreach (var oldItem in dbItemsMap.Values)
+    //            accessor?.Remove(dbEntity, oldItem);
+    //    }
 
-        return await this.DbContext.SaveChangesAsync();
-    }
+    //    return await this.DbContext.SaveChangesAsync();
+    //}
 
-    public async Task<int> UpdateAsyncWithChildren(T entity, params Expression<Func<T, object>>[] navigations)
-    {
-        var dbEntity = await this.DbContext.FindAsync<T>(entity.Id);
+    //public async Task<int> UpdateAsyncWithChildren(T entity, params Expression<Func<T, object>>[] navigations)
+    //{
+    //    var dbEntity = await this.DbContext.FindAsync<T>(entity.Id);
 
-        if (dbEntity == null) 
-            return 0;
+    //    if (dbEntity == null)
+    //        return 0;
 
-        var dbEntry = this.DbContext.Entry(dbEntity);
-        dbEntry.CurrentValues.SetValues(entity);
+    //    var dbEntry = this.DbContext.Entry(dbEntity);
+    //    dbEntry.CurrentValues.SetValues(entity);
 
-        foreach (var property in navigations)
-        {
-            var propertyName = property.GetPropertyAccess().Name;
-            var dbItemsEntry = dbEntry.Collection(propertyName);
-            var accessor = dbItemsEntry.Metadata.GetCollectionAccessor();
+    //    foreach (var property in navigations)
+    //    {
+    //        var propertyName = property.GetPropertyAccess().Name;
+    //        var dbItemsEntry = dbEntry.Collection(propertyName);
+    //        var accessor = dbItemsEntry.Metadata.GetCollectionAccessor();
 
-            await dbItemsEntry.LoadAsync();
-            if (dbItemsEntry.CurrentValue is null) 
-                continue;
+    //        await dbItemsEntry.LoadAsync();
+    //        if (dbItemsEntry.CurrentValue is null)
+    //            continue;
 
-            var dbItemsMap = ((IEnumerable<BaseEntity>)dbItemsEntry.CurrentValue)
-                .ToDictionary(e => e.Id);
+    //        var dbItemsMap = ((IEnumerable<BaseEntity>)dbItemsEntry.CurrentValue)
+    //            .ToDictionary(e => e.Id);
 
-            if (accessor is not null)
-            {
-                var items = (IEnumerable<BaseEntity>)accessor.GetOrCreate(entity, true);
+    //        if (accessor is not null)
+    //        {
+    //            var items = (IEnumerable<BaseEntity>)accessor.GetOrCreate(entity, true);
 
-                foreach (var item in items)
-                {
-                    if (!dbItemsMap.TryGetValue(item.Id, out var oldItem))
-                    {
-                        accessor.Add(dbEntity, item, true);
-                    }
-                    else
-                    {
-                        this.DbContext.Entry(oldItem).CurrentValues.SetValues(item);
-                        dbItemsMap.Remove(item.Id);
-                    }
-                }
-            }
+    //            foreach (var item in items)
+    //            {
+    //                if (!dbItemsMap.TryGetValue(item.Id, out var oldItem))
+    //                {
+    //                    accessor.Add(dbEntity, item, true);
+    //                }
+    //                else
+    //                {
+    //                    this.DbContext.Entry(oldItem).CurrentValues.SetValues(item);
+    //                    dbItemsMap.Remove(item.Id);
+    //                }
+    //            }
+    //        }
 
-            foreach (var oldItem in dbItemsMap.Values)
-                accessor?.Remove(dbEntity, oldItem);
-        }
+    //        foreach (var oldItem in dbItemsMap.Values)
+    //            accessor?.Remove(dbEntity, oldItem);
+    //    }
 
-        return await this.DbContext.SaveChangesAsync();
-    }
+    //    return await this.DbContext.SaveChangesAsync();
+    //}
 
     public void Save() => this.DbContext.SaveChanges();
 

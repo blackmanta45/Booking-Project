@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Core.Entities.Base;
 
 namespace Core.Repositories.Base
 {
-    public interface IRepository<T> 
-        where T : BaseEntity, new()
+    public interface IRepository<T>
+        where T : class, new()
     {
         IEnumerable<T> GetAll();
         Task<List<T>> GetAllAsync();
@@ -28,8 +27,8 @@ namespace Core.Repositories.Base
         Task<bool> DeleteAsync(T itemToDelete);
         void Save();
         Task SaveAsync();
-        Task<int> UpdateAsyncWithChildren(T entity, params Expression<Func<T, object>>[] navigations);
+        //Task<int> UpdateAsyncWithChildren(T entity, params Expression<Func<T, object>>[] navigations);
         IQueryable<T> Query(bool eager = false);
-        Task<int> UpdateAsyncWithAllChildren(T entity);
+        //Task<int> UpdateAsyncWithAllChildren(T entity);
     }
 }

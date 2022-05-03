@@ -1,6 +1,7 @@
 ﻿using System;
 using Core.Common.Enums;
 using Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Extensions
@@ -284,6 +285,45 @@ namespace Infrastructure.Extensions
                 Latitude = 44.31M,
                 Longitude = 23.84M,
                 Quality = 1
+            }, new Hotel
+            {
+                Id = new Guid("cb0ed9a2-7065-4cbe-b925-473053419a0f"),
+                IsDeleted = false,
+                Name = "eee",
+                Description = "EEEE",
+                ShortDescription = "EE",
+                Latitude = 44.31M,
+                Longitude = 23.84M,
+                Quality = 1
+            }, new Hotel
+            {
+                Id = new Guid("37bee21f-8041-4b61-aee9-06836f247e87"),
+                IsDeleted = false,
+                Name = "fff",
+                Description = "FFFF",
+                ShortDescription = "FF",
+                Latitude = 44.31M,
+                Longitude = 23.84M,
+                Quality = 1
             });
+
+
+        public static void SeedRoles(this ModelBuilder builder) =>
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Id = "9ae70e13-c702-451b-8f46-cfeba46708a5",
+                    Name = "Administrator",
+                    ConcurrencyStamp = "1",
+                    NormalizedName = "Admin"
+                },
+                new IdentityRole
+                {
+                    Id = "d2361beb-bde5-4c35-a82f-b0629951ab76",
+                    Name = "User",
+                    ConcurrencyStamp = "2",
+                    NormalizedName = "User"
+                }
+            );
     }
 }

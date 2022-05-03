@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Presentation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503133039_AddedIdentity")]
+    partial class AddedIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +63,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("History", (string)null);
+                    b.ToTable("History");
                 });
 
             modelBuilder.Entity("Core.Entities.Hotel", b =>
@@ -113,7 +115,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("ModifiedById");
 
-                    b.ToTable("Hotel", (string)null);
+                    b.ToTable("Hotel");
 
                     b.HasData(
                         new
@@ -210,7 +212,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("PictureId");
 
-                    b.ToTable("HotelPicture", (string)null);
+                    b.ToTable("HotelPicture");
                 });
 
             modelBuilder.Entity("Core.Entities.Occupation", b =>
@@ -253,7 +255,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("Occupation", (string)null);
+                    b.ToTable("Occupation");
                 });
 
             modelBuilder.Entity("Core.Entities.Picture", b =>
@@ -287,7 +289,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("ModifiedById");
 
-                    b.ToTable("Picture", (string)null);
+                    b.ToTable("Picture");
                 });
 
             modelBuilder.Entity("Core.Entities.Review", b =>
@@ -328,7 +330,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Review", (string)null);
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Core.Entities.Room", b =>
@@ -371,7 +373,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("Room", (string)null);
+                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("Core.Entities.RoomPrice", b =>
@@ -412,7 +414,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("RoomPrice", (string)null);
+                    b.ToTable("RoomPrice");
                 });
 
             modelBuilder.Entity("Core.Entities.RoomType", b =>
@@ -432,7 +434,7 @@ namespace Presentation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoomType", (string)null);
+                    b.ToTable("RoomType");
 
                     b.HasData(
                         new
@@ -789,7 +791,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("PictureId");
 
-                    b.ToTable("UserPicture", (string)null);
+                    b.ToTable("UserPicture");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -808,7 +810,7 @@ namespace Presentation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IdentityRole", (string)null);
+                    b.ToTable("IdentityRole");
 
                     b.HasData(
                         new

@@ -28,7 +28,6 @@ namespace Core.Entities
         public int Quality { get; set; }
         public ICollection<HotelPicture> Pictures { get; set; }
         public ICollection<Room> Rooms { get; set; }
-        public ICollection<Occupation> Occupations { get; set; }
         public ICollection<History> History { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public User CreatedBy { get; set; }

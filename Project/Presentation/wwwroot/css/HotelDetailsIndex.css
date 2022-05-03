@@ -116,7 +116,8 @@
 .product-description,
 .price,
 .vote,
-.sizes {
+.sizes,
+.current-date {
     margin-bottom: 15px;
 }
 
@@ -163,13 +164,6 @@
         color: #fff;
     }
 
-.current-date {
-    padding: 1.2em 1.5em;
-    border: none;
-    text-transform: UPPERCASE;
-    font-weight: bold;
-    position: relative;
-}
 .not-available {
     text-align: center;
     line-height: 2em;

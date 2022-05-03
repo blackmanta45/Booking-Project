@@ -26,7 +26,7 @@ namespace Application.Services
             Guid hotelId)
         {
             var hotel = await this.hotelRepository.GetHotelAsync(hotelId);
-            var user = await this.userRepository.GetByIdAsync(Guid.Parse("f95dfbb2-6437-4421-9a39-aaf1fd112971"));
+            var user = await this.userRepository.GetByIdAsync(Guid.Parse("AC365E29-7F22-472F-BD22-CE7FAB2E48F2"));
             var review = new Review
             {
                 Value = value,

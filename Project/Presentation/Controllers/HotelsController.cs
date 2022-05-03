@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Common.Enums;
 using Core.Entities;
 using Core.Services;
 using Infrastructure.Data;

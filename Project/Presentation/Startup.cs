@@ -4,6 +4,7 @@ using Core;
 using Core.Settings;
 using Infrastructure;
 using Infrastructure.Data;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,19 +28,23 @@ namespace Presentation
         {
             services.Configure<AppSettings>(this.Configuration.GetSection(nameof(AppSettings)));
 
-            services.AddMvc();    
-            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-            services.AddOptions();
+
+            services.AddApplicationDependencies();
+            services.AddCoreDependencies();
+            services.AddInfrastructureDependencies();
 
             var connection = this.Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>().DbConnectionString;
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection,
                 b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
 
-            services.AddApplicationDependencies();
-            services.AddCoreDependencies();
-            services.AddInfrastructureDependencies();
+            services.AddCustomIdentity();
+
+            services.AddMvc();
+            services.AddControllersWithViews();
+            services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddOptions();
 
             services.AddSwaggerGen(c =>
             {
@@ -67,15 +72,11 @@ namespace Presentation
 
             app.UseHttpsRedirection();
 
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                context?.Database.Migrate();
-            }
-
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Core.Entities;
 using Core.Entities.Base;
 using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -22,7 +24,7 @@ public class AppDbContext : DbContext
     public DbSet<RoomType> RoomTypes { get; set; }
     public DbSet<RoomPrice> RoomPrices { get; set; }
     public DbSet<Occupation> Occupations { get; set; }
-    public DbSet<User> Users { get; set; }
+    public new DbSet<User> Users { get; set; }
     public DbSet<UserPicture> UserPictures { get; set; }
     public DbSet<History> History { get; set; }
     public DbSet<Picture> Pictures { get; set; }
@@ -45,5 +47,6 @@ public class AppDbContext : DbContext
         modelBuilder.SeedRoomTypes();
         modelBuilder.SeedUser();
         modelBuilder.SeedHotels();
+        modelBuilder.SeedRoles();
     }
 }

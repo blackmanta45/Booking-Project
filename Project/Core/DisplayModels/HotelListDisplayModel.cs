@@ -15,5 +15,6 @@ namespace Core.DisplayModels
         public string City { get; set; }
         public string Country { get; set; }
         public string Picture { get; set; }
+        public int RoomsCount { get; set; }
     }
 }
