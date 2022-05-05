@@ -32,15 +32,15 @@
 
         <header class="grid">
             <nav class="grid-content">
-                <a class="image-link" href="index.html">
+                <a class="image-link" asp-page="../Home/Index">
                     <img src="~/img/logo.png" alt="logo" class="logo">
                 </a>
                 <ul>
-                    <li> <a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li> <a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li> <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li> <a asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
-                    <li> <a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
+                    <li> <a asp-page="../Home/Index">Home</a></li>
+                    <li> <a asp-page="../Utils/AboutUs">About</a></li>
+                    <li> <a asp-page="../Utils/Contact">Contact</a></li>
+                    <li> <a asp-page="../UserPages/Register">Register</a></li>
+                    <li> <a asp-page="../UserPages/Login">Login</a></li>
                 </ul>
             </nav>
         </header>

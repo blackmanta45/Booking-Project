@@ -1,0 +1,54 @@
+﻿@page
+@model Presentation.Pages.Utils.AboutUsModel
+@{
+}
+
+@section Styles{
+    <link href="@Url.Content("~/css/About.css")" rel="stylesheet" type="text/css"/>
+}
+
+<div class="about-section">
+    <h1>About Us</h1>
+    <p>We make reservations for you</p>
+</div>
+
+<div style="overflow-anchor: none;">
+    <h2 style="margin-top: 1vh; text-align: center;">Our Team</h2>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="~/img/about-pictures/ceo.jpeg" alt="Ben" style="width: 100%">
+                <div class="container">
+                    <h2>Ben Dover</h2>
+                    <p class="title">CEO & Founder</p>
+                    <p>Since 1996, Ben worked hard for the wellbeing of his company and employees.</p>
+                    <p>ben@dover.com</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="~/img/about-pictures/artdirector.jpeg" alt="Mike" style="width: 100%">
+                <div class="container">
+                    <h2>Mike Oxlong</h2>
+                    <p class="title">Art Director</p>
+                    <p>Son of Ben Dover, has achieved great things using his wonderful art.</p>
+                    <p>mike@oxlong.com</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="~/img/about-pictures/headofit.jpeg" alt="Gabe" style="width: 100%">
+                <div class="container">
+                    <h2>Gabe Itch</h2>
+                    <p class="title">Head Of IT</p>
+                    <p>Gabe worked hard for the company security and uptime.</p>
+                    <p>gabe@itch.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

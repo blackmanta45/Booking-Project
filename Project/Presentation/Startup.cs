@@ -4,7 +4,6 @@ using Core;
 using Core.Settings;
 using Infrastructure;
 using Infrastructure.Data;
-using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

@@ -1,0 +1,28 @@
+﻿@page
+@model Presentation.Pages.UserPages.LoginModel
+@{
+    ViewData["Title"] = "Booking";
+}
+
+@section Styles{
+    <link href="@Url.Content("~/css/Login.css")" rel="stylesheet" type="text/css"/>
+}
+
+<div class="login-form">
+    <form method="post">
+        <h1>Login</h1>
+        <div class="content">
+            <div class="input-field">
+                <input type="email" placeholder="Email" autocomplete="nope">
+            </div>
+            <div class="input-field">
+                <input type="password" placeholder="Password" autocomplete="new-password">
+            </div>
+            <a href="#" class="link">Forgot Your Password?</a>
+        </div>
+        <div class="action">
+            <a class="register" asp-page="Login">Register</a>
+            <button type="submit">Sign in</button>
+        </div>
+    </form>
+</div>
