@@ -9,7 +9,5 @@ namespace Core.Entities
     {
         [Required]
         public byte[] Bytes { get; set; }
-        public User CreatedBy { get; set; }
-        public User ModifiedBy { get; set; }
     }
 }

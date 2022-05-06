@@ -30,7 +30,5 @@ namespace Core.Entities
         public ICollection<Room> Rooms { get; set; }
         public ICollection<History> History { get; set; }
         public ICollection<Review> Reviews { get; set; }
-        public User CreatedBy { get; set; }
-        public User ModifiedBy { get; set; }
     }
 }

@@ -40,7 +40,11 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         var modified = this.ChangeTracker.Entries<BaseEntity>().Where(e => e.State == EntityState.Modified).ToList();
         var added = this.ChangeTracker.Entries<BaseEntity>().Where(e => e.State == EntityState.Added).ToList();
-        var user = await this.Users.FindAsync(this.httpContextAccessor.HttpContext?.User.Identity.GetUserId());
+        User user = null;
+        if (Guid.TryParse(this.httpContextAccessor.HttpContext?.User.Identity.GetUserId(), out var userId))
+        {
+            user = await this.Users.FindAsync(userId);
+        }
 
         modified.ForEach(e =>
         {

@@ -24,38 +24,47 @@
             };
             var randomColor = colors[new Random().Next(colors.Count)];
 
-            <a class="postcard__img_link"
-               asp-page="../HotelDetails/HotelDetailsIndex"
-               asp-route-id=@hotel.Id
-               asp-route-people=@Model.People
-               asp-route-startDate="@Model.Start"
-               asp-route-endDate="@Model.End">
-                <article class="postcard light @randomColor">
+            <article class="postcard light @randomColor">
+                
+                <a class="postcard__img_link"
+                   asp-page="../HotelDetails/HotelDetailsIndex"
+                   asp-route-id=@hotel.Id
+                   asp-route-people=@Model.People
+                   asp-route-startDate="@Model.Start"
+                   asp-route-endDate="@Model.End">
                     <img class="postcard__img" src=@hotel.Picture alt="Image Title" style="height: 40vh; object-fit: cover; width: 40vw;"/>
-                    <div class="postcard__text t-dark">
+                </a>
+                <div class="postcard__text t-dark">
+                    
+                    <a class="postcard__img_link"
+                       asp-page="../HotelDetails/HotelDetailsIndex"
+                       asp-route-id=@hotel.Id
+                       asp-route-people=@Model.People
+                       asp-route-startDate="@Model.Start"
+                       asp-route-endDate="@Model.End">
                         <h1 class="postcard__title @randomColor">
                             @hotel.Name
                         </h1>
-                        <div class="postcard__subtitle small">
-                            <time datetime="2020-05-25 12:00:00">
-                                <i class="fas fa-calendar-alt mr-2"></i> @hotel.Date
-                            </time>
-                        </div>
-                        <div class="postcard__bar"></div>
-                        <div class="postcard__preview-txt">@hotel.ShortDescription</div>
-                        <ul class="postcard__tagbox">
-                            @if (!string.IsNullOrEmpty(Model.City))
-                            {
-                                <li class="tag__item play @randomColor">
-                                    <i class="fas fa-tag mr-2"></i> @Model.City
-                                </li>
-                            }
-                            <li class="tag__item play @randomColor"><i class="fa-solid fa-person"></i> @(Array.IndexOf(Enum.GetValues(Model.People.GetType()), Model.People) + 1) Person@(Array.IndexOf(Enum.GetValues(Model.People.GetType()), Model.People) > 0 ? "s" : "")</li>
-                            <li class="tag__item play @randomColor"><i class="fa-solid fa-person-shelter"></i> @hotel.RoomsCount rooms left</li>
-                        </ul>
+                    </a>
+                    <div class="postcard__subtitle small">
+                        <time datetime="2020-05-25 12:00:00">
+                            <i class="fas fa-calendar-alt mr-2"></i> @hotel.Date
+                        </time>
                     </div>
-                </article>
-            </a>
+                    <div class="postcard__bar"></div>
+                    <div class="postcard__preview-txt">@hotel.ShortDescription</div>
+                    <ul class="postcard__tagbox">
+                        @if (!string.IsNullOrEmpty(Model.City))
+                        {
+                            <li class="tag__item play @randomColor">
+                                <i class="fas fa-tag mr-2"></i> @Model.City
+                            </li>
+                        }
+                        <li class="tag__item play @randomColor"><i class="fa-solid fa-person"></i> @(Array.IndexOf(Enum.GetValues(Model.People.GetType()), Model.People) + 1) Person@(Array.IndexOf(Enum.GetValues(Model.People.GetType()), Model.People) > 0 ? "s" : "")</li>
+                        <li class="tag__item play @randomColor"><i class="fa-solid fa-person-shelter"></i> @hotel.RoomsCount rooms left</li>
+                    </ul>
+                </div>
+            </article>
         }
     </div>
 </section>
