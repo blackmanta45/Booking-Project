@@ -6,7 +6,7 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("Review")]
-    public sealed class Review : BaseEntity
+    public sealed class Review : BaseEntityWithoutTracking
     {
         [Range(1, 5)]
         public int Value { get; set; }

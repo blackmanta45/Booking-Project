@@ -16,8 +16,5 @@ namespace Core.Entities
 
         [Required]
         public DateTime Date { get; set; }
-
-        public User CreatedBy { get; set; }
-        public User ModifiedBy { get; set; }
     }
 }

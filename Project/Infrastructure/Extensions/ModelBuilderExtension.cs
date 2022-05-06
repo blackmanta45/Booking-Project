@@ -1,7 +1,6 @@
 ﻿using System;
 using Core.Common.Enums;
 using Core.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Extensions
@@ -221,19 +220,6 @@ namespace Infrastructure.Extensions
                     Stars = 5
                 });
 
-        public static void SeedUser(this ModelBuilder modelBuilder) =>
-            modelBuilder.Entity<User>().HasData(new User
-            {
-                Id = new Guid("ac365e29-7f22-472f-bd22-ce7fab2e48f2"),
-                IsDeleted = false,
-                Name = "George",
-                Surname = "George",
-                DateOfBirth = DateTime.Now.AddYears(-18),
-                Email = "georgegeorge@george.com",
-                Phone = "0767676767",
-                Gender = Gender.ApacheHelicopter
-            });
-
         public static void SeedHotels(this ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Hotel>().HasData(new Hotel
             {
@@ -308,22 +294,22 @@ namespace Infrastructure.Extensions
             });
 
 
-        public static void SeedRoles(this ModelBuilder builder) =>
-            builder.Entity<IdentityRole>().HasData(
-                new IdentityRole
-                {
-                    Id = "9ae70e13-c702-451b-8f46-cfeba46708a5",
-                    Name = "Administrator",
-                    ConcurrencyStamp = "1",
-                    NormalizedName = "Admin"
-                },
-                new IdentityRole
-                {
-                    Id = "d2361beb-bde5-4c35-a82f-b0629951ab76",
-                    Name = "User",
-                    ConcurrencyStamp = "2",
-                    NormalizedName = "User"
-                }
-            );
+        //public static void SeedRoles(this ModelBuilder builder) =>
+        //    builder.Entity<IdentityRole>().HasData(
+        //        new IdentityRole
+        //        {
+        //            Id = "9ae70e13-c702-451b-8f46-cfeba46708a5",
+        //            Name = "Administrator",
+        //            ConcurrencyStamp = "1",
+        //            NormalizedName = "Admin"
+        //        },
+        //        new IdentityRole
+        //        {
+        //            Id = "d2361beb-bde5-4c35-a82f-b0629951ab76",
+        //            Name = "User",
+        //            ConcurrencyStamp = "2",
+        //            NormalizedName = "User"
+        //        }
+        //    );
     }
 }

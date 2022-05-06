@@ -13,11 +13,5 @@ namespace Core.Entities
 
         [Required]
         public Room Room { get; set; }
-
-        [Required]
-        public Hotel Hotel { get; set; }
-
-        public User CreatedBy { get; set; }
-        public User ModifiedBy { get; set; }
     }
 }

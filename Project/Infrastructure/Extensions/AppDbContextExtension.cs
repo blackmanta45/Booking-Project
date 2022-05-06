@@ -154,7 +154,7 @@ public static class AppDbContextExtension
         };
         await dbContext.UserPictures.AddAsync(userPicture);
 
-        var user = await dbContext.Users.FindAsync(new Guid("ac365e29-7f22-472f-bd22-ce7fab2e48f2"));
+        var user = await dbContext.Users.FindAsync(new Guid("f98ebb4c-ff40-4d7b-ad63-7a81327aadb0"));
         if (user is not null)
         {
             user.Picture = userPicture;
@@ -166,7 +166,7 @@ public static class AppDbContextExtension
 
     private static async Task SeedReviews(this AppDbContext dbContext)
     {
-        var user = await dbContext.Users.FindAsync(new Guid("ac365e29-7f22-472f-bd22-ce7fab2e48f2"));
+        var user = await dbContext.Users.FindAsync(new Guid("f98ebb4c-ff40-4d7b-ad63-7a81327aadb0"));
         var hotel = await dbContext.Hotels.FindAsync(new Guid("2F2FE0DE-D277-4852-8FB4-2DCEAC60A5FD"));
 
         var n = new Random().Next(1, 6);
@@ -184,6 +184,7 @@ public static class AppDbContextExtension
             await dbContext.Reviews.AddAsync(review);
             await dbContext.SaveChangesAsync();
         }
+
         hotel = await dbContext.Hotels.FindAsync(new Guid("048B1F87-B7C9-4CCF-AF0F-5CB29DDEBC78"));
 
         n = new Random().Next(1, 6);

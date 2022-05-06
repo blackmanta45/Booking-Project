@@ -5,7 +5,7 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("UserPicture")]
-    public sealed class UserPicture : BaseEntity
+    public sealed class UserPicture : BaseEntityWithoutTracking
     {
         [Required]
         public Picture Picture { get; set; }

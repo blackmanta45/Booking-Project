@@ -6,7 +6,7 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("History")]
-    public class History : BaseEntity
+    public class History : BaseEntityWithoutTracking
     {
         [Required]
         public decimal Price { get; set; }

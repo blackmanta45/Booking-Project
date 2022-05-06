@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities.Base
 {
-    public interface IBaseEntity
+    public class BaseEntityWithoutTracking
     {
         [Key]
         [Required]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public bool IsDeleted { get; set; }
 

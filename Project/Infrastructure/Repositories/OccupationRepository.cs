@@ -25,8 +25,7 @@ namespace Infrastructure.Repositories
             var occupation = new Occupation
             {
                 Date = date,
-                Room = room,
-                Hotel = room.Hotel
+                Room = room
             };
             await this.AddAsync(occupation);
         }
