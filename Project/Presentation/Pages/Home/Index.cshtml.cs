@@ -20,7 +20,6 @@ namespace Presentation.Pages.Home
             if (this.ModelState.IsValid)
             {
                 return this.RedirectToPage("../HotelList/HotelListIndex", new {ViewModel.StartDate, ViewModel.EndDate, ViewModel.Latitude, ViewModel.Longitude, ViewModel.City, ViewModel.Country, ViewModel.People});
-                //return this.RedirectToPage($"/HotelList/HotelListIndex/{ViewModel.StartDate}/{ViewModel.EndDate}/{ViewModel.Latitude}/{ViewModel.Longitude}/{ViewModel.City}/{ViewModel.Country}/{ViewModel.People}");
             }
 
             return this.Page();

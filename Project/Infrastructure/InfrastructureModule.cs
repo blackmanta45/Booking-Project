@@ -14,6 +14,8 @@ namespace Infrastructure
             services.AddScoped<IOccupationRepository, OccupationRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserPictureRepository, UserPictureRepository>();
+            services.AddScoped<IPictureRepository, PictureRepository>();
 
             return services;
         }

@@ -12,8 +12,10 @@ namespace Application
         {
             services.AddScoped<IHotelService, HotelService>();
             services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IPictureService, PictureService>();
+            services.AddScoped<IUserService, UserService>();
 
-            services.AddScoped<IHotelResourceServant, HotelResourceServant>();
+            services.AddScoped<IDisplayModelResourceServant, DisplayModelResourceServant>();
 
             return services;
         }

@@ -6,8 +6,6 @@ namespace Core
     {
         public static IServiceCollection AddCoreDependencies(this IServiceCollection services)
         {
-            //services.AddScoped<IFeedbackService, FeedbackService>();
-
             return services;
         }
     }

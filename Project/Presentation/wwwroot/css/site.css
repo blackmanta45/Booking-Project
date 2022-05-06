@@ -54,7 +54,8 @@ select {
 }
 
 input:focus, select:focus, input:active, select:active {
-     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1) !important;
+    background-color: #f1f1f1;
 }
 
 input::placeholder {

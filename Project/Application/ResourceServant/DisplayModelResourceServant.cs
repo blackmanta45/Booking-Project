@@ -4,7 +4,7 @@ using Core.ResourceServant;
 
 namespace Application.ResourceServant
 {
-    public class HotelResourceServant : IHotelResourceServant
+    public class DisplayModelResourceServant : IDisplayModelResourceServant
     {
         public HotelListDisplayModel ToListDisplayModel(
             Hotel hotel,

@@ -13,13 +13,13 @@ namespace Presentation.Pages.HotelList
 {
     public class HotelListIndexModel : PageModel
     {
-        private readonly IHotelResourceServant hotelResourceServant;
+        private readonly IDisplayModelResourceServant displayModelResourceServant;
         private readonly IHotelService hotelService;
 
-        public HotelListIndexModel(IHotelService hotelService, IHotelResourceServant hotelResourceServant)
+        public HotelListIndexModel(IHotelService hotelService, IDisplayModelResourceServant displayModelResourceServant)
         {
             this.hotelService = hotelService;
-            this.hotelResourceServant = hotelResourceServant;
+            this.displayModelResourceServant = displayModelResourceServant;
         }
 
         public string City { get; set; }
@@ -54,7 +54,7 @@ namespace Presentation.Pages.HotelList
                 longitude,
                 people);
 
-            this.Hotels = hotels.Select(x => this.hotelResourceServant.ToListDisplayModel(x, this.Country, this.City, this.Start, this.End)).ToList();
+            this.Hotels = hotels.Select(x => this.displayModelResourceServant.ToListDisplayModel(x, this.Country, this.City, this.Start, this.End)).ToList();
             return this.Page();
         }
 

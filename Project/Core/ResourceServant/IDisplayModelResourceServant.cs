@@ -4,7 +4,7 @@ using Core.Entities;
 
 namespace Core.ResourceServant
 {
-    public interface IHotelResourceServant
+    public interface IDisplayModelResourceServant
     {
         HotelListDisplayModel ToListDisplayModel(
             Hotel hotel,

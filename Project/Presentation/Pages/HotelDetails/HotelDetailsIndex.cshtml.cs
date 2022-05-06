@@ -13,17 +13,17 @@ namespace Presentation.Pages.HotelDetails
 {
     public class HotelDetailsIndexModel : PageModel
     {
-        private readonly IHotelResourceServant hotelResourceServant;
+        private readonly IDisplayModelResourceServant displayModelResourceServant;
         private readonly IHotelService hotelService;
         private readonly IReviewService reviewService;
 
         public HotelDetailsIndexModel(
             IHotelService hotelService,
-            IHotelResourceServant hotelResourceServant,
+            IDisplayModelResourceServant displayModelResourceServant,
             IReviewService reviewService)
         {
             this.hotelService = hotelService;
-            this.hotelResourceServant = hotelResourceServant;
+            this.displayModelResourceServant = displayModelResourceServant;
             this.reviewService = reviewService;
         }
 
@@ -47,7 +47,7 @@ namespace Presentation.Pages.HotelDetails
             if (this.Hotel is null)
                 return this.RedirectToPage("/Home/Index");
 
-            this.HotelDetailsDisplayModel = this.hotelResourceServant.ToDetailsDisplayModel(this.Hotel);
+            this.HotelDetailsDisplayModel = this.displayModelResourceServant.ToDetailsDisplayModel(this.Hotel);
             return this.Page();
         }
 
@@ -72,7 +72,7 @@ namespace Presentation.Pages.HotelDetails
                     Value = 1
                 })
             };
-
+        
         public async Task<IActionResult> OnPostAddReviewSubmit(
             string description,
             int rating,
@@ -90,7 +90,7 @@ namespace Presentation.Pages.HotelDetails
             if (this.Hotel is null)
                 return this.RedirectToPage("/Home/Index");
 
-            this.HotelDetailsDisplayModel = this.hotelResourceServant.ToDetailsDisplayModel(this.Hotel);
+            this.HotelDetailsDisplayModel = this.displayModelResourceServant.ToDetailsDisplayModel(this.Hotel);
 
             return this.Page();
         }

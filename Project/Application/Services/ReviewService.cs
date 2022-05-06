@@ -1,6 +1,8 @@
 ﻿using Core.Entities;
 using Core.Repositories;
 using Core.Services;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Services
 {
@@ -9,14 +11,17 @@ namespace Application.Services
         private readonly IHotelRepository hotelRepository;
         private readonly IReviewRepository reviewRepository;
         private readonly IUserRepository userRepository;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
         public ReviewService(
             IReviewRepository reviewRepository,
             IHotelRepository hotelRepository,
+            IHttpContextAccessor httpContextAccessor,
             IUserRepository userRepository)
         {
             this.reviewRepository = reviewRepository;
             this.hotelRepository = hotelRepository;
+            this.httpContextAccessor = httpContextAccessor;
             this.userRepository = userRepository;
         }
 
@@ -26,7 +31,7 @@ namespace Application.Services
             Guid hotelId)
         {
             var hotel = await this.hotelRepository.GetHotelAsync(hotelId);
-            var user = await this.userRepository.GetByIdAsync(Guid.Parse("AC365E29-7F22-472F-BD22-CE7FAB2E48F2"));
+            var user = await this.userRepository.GetByIdAsync(Guid.Parse(this.httpContextAccessor.HttpContext.User.Identity.GetUserId()));
             var review = new Review
             {
                 Value = value,

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Presentation.Models.UserViewModels
 {
-    public class RegisterViewModel
+    public class ProfileViewModel
     {
         [EmailAddress]
         [Required]
@@ -40,8 +40,7 @@ namespace Presentation.Models.UserViewModels
         [MinLength(10)]
         public string Phone { get; set; }
 
-        [Required]
-        public IFormFile  Picture { get; set; }
+        public IFormFile Picture { get; set; }
 
         [Range(typeof(bool), "true", "true", ErrorMessage = "Passwords must match!")]
         public bool PasswordsMatch => this.RepeatedPassword == this.Password;

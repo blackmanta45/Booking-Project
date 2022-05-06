@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +13,12 @@ namespace Presentation.Controllers
     public class UsersController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly SignInManager<User> signInManager;
 
-        public UsersController(AppDbContext context)
+        public UsersController(AppDbContext context, SignInManager<User> signInManager)
         {
             this._context = context;
+            this.signInManager = signInManager;
         }
 
         // GET: Users
@@ -139,6 +143,14 @@ namespace Presentation.Controllers
             this._context.Users.Remove(user);
             await this._context.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+
+            return this.RedirectToPage("/Home/Index");
         }
 
         private bool UserExists(Guid id) => this._context.Users.Any(e => e.Id == id);
