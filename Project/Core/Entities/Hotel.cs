@@ -6,7 +6,8 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("Hotel")]
-    public sealed class Hotel : BaseEntity, ITrackUser
+    public sealed class Hotel : BaseEntity,
+        ITrackUser
     {
         [Required]
         public string Name { get; set; }
@@ -26,6 +27,7 @@ namespace Core.Entities
 
         [Range(1, 5)]
         public int Quality { get; set; }
+
         public ICollection<HotelPicture> Pictures { get; set; }
         public ICollection<Room> Rooms { get; set; }
         public ICollection<History> History { get; set; }

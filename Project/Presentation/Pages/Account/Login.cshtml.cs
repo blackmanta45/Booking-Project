@@ -27,7 +27,7 @@ namespace Presentation.Pages.Account
             {
                 var result = await this.signInManager.PasswordSignInAsync(this.Model.Username, this.Model.Password, true, false);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                     return this.RedirectToPage("Profile");
 
                 this.ModelState.AddModelError("Invalid", "Invalid username or password");

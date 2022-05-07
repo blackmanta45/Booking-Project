@@ -2,8 +2,6 @@
 using Core.Entities;
 using Core.Repositories;
 using Core.Services;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Http;
 
 namespace Application.Services
 {

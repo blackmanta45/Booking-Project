@@ -34,7 +34,7 @@ namespace Infrastructure.Extensions
             else
             {
                 var claims = await userManager.GetClaimsAsync(defaultUser);
-                if(!claims.Any())
+                if (!claims.Any())
                     await userManager.AddClaimAsync(defaultUser, new Claim(ClaimTypes.Role, "admin"));
             }
         }

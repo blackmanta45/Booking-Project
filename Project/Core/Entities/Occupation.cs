@@ -6,7 +6,8 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("Occupation")]
-    public sealed class Occupation : BaseEntity, ITrackUser
+    public sealed class Occupation : BaseEntity,
+        ITrackUser
     {
         [Required]
         public DateTime Date { get; set; }

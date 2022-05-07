@@ -25,7 +25,7 @@ namespace Presentation.Models.Hotel
         public decimal Longitude { get; set; }
 
         public string Location { get; set; }
-        
+
         [Required]
         [Range(1, 5)]
         public int Quality { get; set; }
@@ -55,6 +55,6 @@ namespace Presentation.Models.Hotel
         public int SixPersonRooms { get; set; }
 
         [Required]
-        public IList<IFormFile>  Picture { get; set; }
+        public IList<IFormFile> Picture { get; set; }
     }
 }

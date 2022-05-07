@@ -33,13 +33,13 @@ namespace Infrastructure.Repositories
         {
             var hotel = await this.GetTable()
                 .Include(x => x.Rooms)
-                .ThenInclude(y => y.Type)
+                    .ThenInclude(y => y.Type)
                 .Include(x => x.Pictures)
-                .ThenInclude(y => y.Picture)
+                    .ThenInclude(y => y.Picture)
                 .Include(x => x.Reviews)
-                .ThenInclude(y => y.User)
-                .ThenInclude(z => z.Picture)
-                .ThenInclude(t => t.Picture)
+                    .ThenInclude(y => y.User)
+                        .ThenInclude(z => z.Picture)
+                            .ThenInclude(t => t.Picture)
                 .Where(z => z.Id == id).FirstOrDefaultAsync();
             return hotel;
         }

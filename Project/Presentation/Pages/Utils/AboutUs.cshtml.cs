@@ -6,14 +6,8 @@ namespace Presentation.Pages.Utils
 {
     public class AboutUsModel : PageModel
     {
-        public async Task<IActionResult> OnGetAsync()
-        {
-            return this.Page();
-        }
+        public async Task<IActionResult> OnGetAsync() => this.Page();
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            return this.Page();
-        }
+        public async Task<IActionResult> OnPostAsync() => this.Page();
     }
 }

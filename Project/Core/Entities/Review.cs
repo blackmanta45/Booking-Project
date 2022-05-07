@@ -14,13 +14,13 @@ namespace Core.Entities
         [Required]
         [StringLength(1000)]
         public string Description { get; set; }
-        
+
         [Required]
         public DateTime Date { get; set; }
-        
+
         [Required]
         public Hotel Hotel { get; set; }
-        
+
         [Required]
         public User User { get; set; }
     }

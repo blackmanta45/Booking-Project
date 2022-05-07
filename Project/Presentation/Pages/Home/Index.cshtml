@@ -1,8 +1,7 @@
 ﻿@page
+@using Core.Common.Enums
 @model Presentation.Pages.Home.IndexPageModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using Core.Common.Enums;
-@using Presentation.Models.Home;
 @{
     ViewData["Title"] = "Booking";
 }
@@ -20,7 +19,7 @@
             id="people"
 
             asp-for="ViewModel.People"
-            asp-items=@(Html.GetEnumSelectList<AvailableRoomSize>())
+            asp-items="@(Html.GetEnumSelectList<AvailableRoomSize>())"
 
             class="form-control people-input"
             value="1"
@@ -34,101 +33,110 @@
 
 </form>
 
-    
+
 @section Scripts{
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }
 
 <script type="text/javascript">
-  $(function() {
-    var datepickeropen = false;
-    $('input[name="datefilter"]').daterangepicker({
-      autoUpdateInput: false,
-      minDate: new Date(),
-      locale: {
-        cancelLabel: 'Clear'
-      }
+    $(function() {
+        var datepickeropen = false;
+        $('input[name="datefilter"]').daterangepicker({
+            autoUpdateInput: false,
+            minDate: new Date(),
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="datefilter"]').on('apply.daterangepicker',
+            function(ev, picker) {
+                $(this).val((picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY')).toString());
+            });
+
+        $('input[name="datefilter"]').on('cancel.daterangepicker',
+            function(ev, picker) {
+                $(this).val('');
+            });
+
+        $('input[name="datefilter"]').on('show.daterangepicker',
+            function(ev, picker) {
+                var datefilter = document.getElementById("datefilter");
+                datefilter.style.background = "#ddd";
+                datepickeropen = true;
+            });
+
+        $('input[name="datefilter"]').on('hide.daterangepicker',
+            function(ev, picker) {
+                var datefilter = document.getElementById('datefilter');
+                datefilter.style.background = "white";
+                datepickeropen = false;
+            });
+
+        $('input').bind('mouseover',
+            function() {
+                var input = $(this)[0];
+                input.style.background = "#ddd";
+                input.style.zIndex = 1;
+
+                $('input').bind('mouseout',
+                    function() {
+                        if (datepickeropen == false || (datepickeropen == true && input.name != "datefilter")) {
+                            input.style.background = "white";
+                            input.style.zIndex = 0;
+                        }
+                    });
+            });
+
+        $('select').bind('mouseover',
+            function() {
+                var select = $(this)[0];
+                select.style.background = '#ddd';
+                select.style.zIndex = 1;
+
+                $('select').bind('mouseout',
+                    function() {
+                        if (datepickeropen == false || (datepickeropen == true && select.name != "datefilter")) {
+                            select.style.background = 'white';
+                            select.style.zIndex = 0;
+                        }
+                    });
+            });
+
     });
-
-    $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-      $(this).val((picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY')).toString());
-    });
-
-    $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-      $(this).val('');
-    });
-
-    $('input[name="datefilter"]').on('show.daterangepicker', function(ev, picker) {
-      var datefilter = document.getElementById("datefilter");
-      datefilter.style.background = "#ddd";
-      datepickeropen = true;
-    });
-
-    $('input[name="datefilter"]').on('hide.daterangepicker', function(ev, picker) {
-      var datefilter = document.getElementById('datefilter');
-      datefilter.style.background = "white";
-      datepickeropen = false;
-    });
-
-    $('input').bind('mouseover', function() {
-      var input = $(this)[0];
-      input.style.background = "#ddd";
-      input.style.zIndex = 1;
-
-      $('input').bind('mouseout', function() {
-        if (datepickeropen == false || (datepickeropen == true && input.name != "datefilter")) {
-          input.style.background = "white";
-          input.style.zIndex = 0;
-        }
-      });
-    });
-
-    $('select').bind('mouseover', function() {
-      var select = $(this)[0];
-      select.style.background = '#ddd';
-      select.style.zIndex = 1;
-
-      $('select').bind('mouseout', function() {
-        if (datepickeropen == false || (datepickeropen == true && select.name != "datefilter")) {
-          select.style.background = 'white';
-          select.style.zIndex = 0;
-        }
-      });
-    });
-
-  });
 </script>
 
 <!-- map script -->
 <script>
-  function addressUpdated(addressComponents) {
-    var street = addressComponents.addressLine1;
-    var city = addressComponents.city;
-    var state = addressComponents.postalCode;
-    var country = addressComponents.country;
+    function addressUpdated(addressComponents) {
+        var street = addressComponents.addressLine1;
+        var city = addressComponents.city;
+        var state = addressComponents.postalCode;
+        var country = addressComponents.country;
 
-    $('#city')[0].value = city;
-    $('#country')[0].value = country;
-  }
-
-  function update(element) {
-      var location = element.locationpicker('map').location;
-      addressUpdated(location.addressComponents);
-      
-      $('#latitude')[0].value = location.latitude;
-      $('#longitude')[0].value = location.longitude;
-  }
-  $('#map').locationpicker({
-    radius: 0,
-    inputBinding: {
-      locationNameInput: $('#location')
-    },
-    enableAutocomplete: true,
-    onchanged: function(currentLocation, radius, isMarkerDropped) {
-      update($(this));
-    },
-    oninitialized: function(component) {
-      update($(component));
+        $('#city')[0].value = city;
+        $('#country')[0].value = country;
     }
-  });
+
+    function update(element) {
+        var location = element.locationpicker('map').location;
+        addressUpdated(location.addressComponents);
+
+        $('#latitude')[0].value = location.latitude;
+        $('#longitude')[0].value = location.longitude;
+    }
+
+    $('#map').locationpicker({
+        radius: 0,
+        inputBinding: {
+            locationNameInput: $('#location')
+        },
+        enableAutocomplete: true,
+        onchanged: function(currentLocation, radius, isMarkerDropped) {
+            update($(this));
+        },
+        oninitialized: function(component) {
+            update($(component));
+        }
+    });
 </script>

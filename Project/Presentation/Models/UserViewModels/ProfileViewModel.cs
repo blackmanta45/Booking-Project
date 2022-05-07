@@ -34,7 +34,7 @@ namespace Presentation.Models.UserViewModels
 
         [Required]
         public string Surname { get; set; }
-        
+
         [Required]
         [MaxLength(10)]
         [MinLength(10)]

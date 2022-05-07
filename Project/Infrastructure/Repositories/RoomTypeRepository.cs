@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Core.Common.Enums;
 using Core.Entities;
 using Core.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -16,7 +16,7 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public async Task<RoomType> GetForSizeAndQuality(AvailableRoomSize people, int quality) 
+        public async Task<RoomType> GetForSizeAndQuality(AvailableRoomSize people, int quality)
             => await this.GetTable().Where(x => x.People == people && x.Stars == quality).FirstOrDefaultAsync();
     }
 }

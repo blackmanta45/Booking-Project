@@ -5,7 +5,7 @@ using Core.Repositories.Base;
 
 namespace Core.Repositories
 {
-    public interface IRoomPriceRepository: IRepository<RoomPrice>
+    public interface IRoomPriceRepository : IRepository<RoomPrice>
     {
         Task<List<RoomPrice>> GetAllForRoom(Room room);
     }

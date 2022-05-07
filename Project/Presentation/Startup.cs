@@ -1,10 +1,13 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
+using System.Security.Claims;
 using Application;
 using Core;
 using Core.Entities;
 using Core.Settings;
 using Infrastructure;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -46,6 +49,14 @@ namespace Presentation
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddOptions();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x => x.ExpireTimeSpan = new TimeSpan(0, 0, 30, 0));
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
+            });
 
             services.AddSwaggerGen(c =>
             {

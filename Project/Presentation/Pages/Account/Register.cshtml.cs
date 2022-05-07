@@ -12,11 +12,13 @@ namespace Presentation.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private readonly IPictureService pictureService;
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
-        private readonly IPictureService pictureService;
 
-        public RegisterModel(SignInManager<User> signInManager, UserManager<User> userManager,
+        public RegisterModel(
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
             IPictureService pictureService)
         {
             this.signInManager = signInManager;
@@ -44,7 +46,7 @@ namespace Presentation.Pages.Account
                     Phone = this.Model.Phone
                 };
                 var result = await this.userManager.CreateAsync(user, this.Model.Password);
-                
+
                 await this.userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "basic"));
 
                 if (result.Succeeded)

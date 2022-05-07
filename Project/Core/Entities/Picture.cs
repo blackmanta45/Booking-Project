@@ -5,7 +5,8 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("Picture")]
-    public sealed class Picture : BaseEntity, ITrackUser
+    public sealed class Picture : BaseEntity,
+        ITrackUser
     {
         [Required]
         public byte[] Bytes { get; set; }

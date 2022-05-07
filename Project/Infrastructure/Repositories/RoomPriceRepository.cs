@@ -15,9 +15,6 @@ namespace Infrastructure.Repositories
         {
         }
 
-        public async Task<List<RoomPrice>> GetAllForRoom(Room room)
-        {
-            return await this.GetQuery(x => x.Room == room).ToListAsync();
-        }
+        public async Task<List<RoomPrice>> GetAllForRoom(Room room) => await this.GetQuery(x => x.Room == room).ToListAsync();
     }
 }

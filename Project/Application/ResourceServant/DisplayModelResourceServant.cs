@@ -30,8 +30,8 @@ namespace Application.ResourceServant
 
         public HotelDetailsDisplayModel ToDetailsDisplayModel(Hotel hotel)
         {
-            var enjoyPercentage = 100.0;  
-            if(hotel.Reviews.Count > 0)
+            var enjoyPercentage = 100.0;
+            if (hotel.Reviews.Count > 0)
             {
                 var happy = hotel.Reviews.Count(x => x.Value > 3) * 1.0;
                 enjoyPercentage = happy / hotel.Reviews.Count * 100;
@@ -70,7 +70,7 @@ namespace Application.ResourceServant
 
         private static string? ToPicture(Picture? picture)
         {
-            if (picture is null) 
+            if (picture is null)
                 return null;
 
             var imageBase64Data = Convert.ToBase64String(picture.Bytes);

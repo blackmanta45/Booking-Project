@@ -73,7 +73,7 @@ namespace Presentation.Pages.Hotels
                     Value = 1
                 })
             };
-        
+
         public async Task<IActionResult> OnPostAddReviewSubmit(
             string description,
             int rating,

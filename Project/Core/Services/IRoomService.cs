@@ -6,6 +6,9 @@ namespace Core.Services
 {
     public interface IRoomService
     {
-        Task AddRoomsForHotel(Hotel hotel, AvailableRoomSize people, int number);
+        Task AddRoomsForHotel(
+            Hotel hotel,
+            AvailableRoomSize people,
+            int number);
     }
 }

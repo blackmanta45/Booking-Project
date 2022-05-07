@@ -1,7 +1,6 @@
 ﻿@page
-@using Core.Common.Enums
-@using Presentation.Models.UserViewModels
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Core.Common.Enums
 @model Presentation.Pages.Account.ProfileModel
 @{
     ViewData["Title"] = "Booking";
@@ -15,68 +14,68 @@
     <div class="container">
         <h1>Profile</h1>
         <hr>
-        
+
         <label for="email">
             <b>Email</b>
         </label>
-        <input type="text" placeholder="Enter Email" required asp-for="Model.Email" value=@Model.Model.Email>
-        <span class ="text-danger" asp-validation-for="Model.Email"></span>
+        <input type="text" placeholder="Enter Email" required asp-for="Model.Email" value="@Model.Model.Email">
+        <span class="text-danger" asp-validation-for="Model.Email"></span>
 
         <br/>
         <label for="name">
             <b>Name</b>
         </label>
-        <input type="text" placeholder="Enter Name" required asp-for="Model.Name" value=@Model.Model.Name>
-        <span class ="text-danger" asp-validation-for="Model.Name"></span>
+        <input type="text" placeholder="Enter Name" required asp-for="Model.Name" value="@Model.Model.Name">
+        <span class="text-danger" asp-validation-for="Model.Name"></span>
 
         <br/>
         <label for="surname">
             <b>Surname</b>
         </label>
-        <input type="text" placeholder="Enter Surname" required asp-for="Model.Surname" value=@Model.Model.Surname>
-        <span class ="text-danger" asp-validation-for="Model.Surname"></span>
-        
+        <input type="text" placeholder="Enter Surname" required asp-for="Model.Surname" value="@Model.Model.Surname">
+        <span class="text-danger" asp-validation-for="Model.Surname"></span>
+
         <br/>
         <label for="phone">
             <b>Phone</b>
         </label>
-        <input type="text" placeholder="Enter Phone" required asp-for="Model.Phone" value=@Model.Model.Phone>
-        <span class ="text-danger" asp-validation-for="Model.Phone"></span>
+        <input type="text" placeholder="Enter Phone" required asp-for="Model.Phone" value="@Model.Model.Phone">
+        <span class="text-danger" asp-validation-for="Model.Phone"></span>
 
         <br/>
         <label for="username">
             <b>Username</b>
         </label>
-        <input type="text" placeholder="Enter Username" required asp-for="Model.Username" value=@Model.Model.Username>
-        <span class ="text-danger" asp-validation-for="Model.Username"></span>
-        
+        <input type="text" placeholder="Enter Username" required asp-for="Model.Username" value="@Model.Model.Username">
+        <span class="text-danger" asp-validation-for="Model.Username"></span>
+
         <br/>
         <label for="password">
             <b>Password</b>
         </label>
         <input type="password" placeholder="Enter Password" required asp-for="Model.Password">
-        <span class ="text-danger" asp-validation-for="Model.Password"></span>
+        <span class="text-danger" asp-validation-for="Model.Password"></span>
         <br/>
-        <span class ="text-danger" asp-validation-for="Model.PasswordsMatch"></span>
-        
+        <span class="text-danger" asp-validation-for="Model.PasswordsMatch"></span>
+
         <br/>
         <label for="repeatedpassword">
             <b>Confirm Password</b>
         </label>
         <input type="password" placeholder="Confirm Password" required asp-for="Model.RepeatedPassword">
-        <span class ="text-danger" asp-validation-for="Model.RepeatedPassword"></span>
+        <span class="text-danger" asp-validation-for="Model.RepeatedPassword"></span>
         <br/>
-        <span class ="text-danger" asp-validation-for="Model.PasswordsMatch"></span>
-        
+        <span class="text-danger" asp-validation-for="Model.PasswordsMatch"></span>
+
         <br/>
         <label for="Gender">
             <b>Gender</b>
         </label>
         <select
             asp-for="Model.Gender"
-            asp-items=@(Html.GetEnumSelectList<Gender>())
+            asp-items="@(Html.GetEnumSelectList<Gender>())"
             placeholder="Select Gender"
-            value=@Model.Model.Gender>
+            value="@Model.Model.Gender">
         </select>
         <span asp-validation-for="Model.Gender" class="text-danger"></span>
 
@@ -88,7 +87,9 @@
         <span asp-validation-for="Model.Picture" class="text-danger"></span>
 
         <hr>
-        <p><a asp-page="../Utils/TermsAndServices">Terms & Privacy</a></p>
+        <p>
+            <a asp-page="../Utils/TermsAndServices">Terms & Privacy</a>
+        </p>
 
         <button class="registerbtn" type="submit">Save</button>
     </div>

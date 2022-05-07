@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Core.Settings;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;

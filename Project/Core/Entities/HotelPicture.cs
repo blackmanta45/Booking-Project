@@ -9,7 +9,7 @@ namespace Core.Entities
     {
         [Required]
         public Picture Picture { get; set; }
-        
+
         [Required]
         public Hotel Hotel { get; set; }
     }

@@ -6,7 +6,8 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("RoomPrice")]
-    public sealed class RoomPrice : BaseEntity, ITrackUser
+    public sealed class RoomPrice : BaseEntity,
+        ITrackUser
     {
         [Required]
         public Room Room { get; set; }

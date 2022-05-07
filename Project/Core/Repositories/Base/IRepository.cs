@@ -26,7 +26,9 @@ namespace Core.Repositories.Base
         bool Delete(T itemToDelete);
         Task<bool> DeleteAsync(T itemToDelete);
         void Save();
+
         Task SaveAsync();
+
         //Task<int> UpdateAsyncWithChildren(T entity, params Expression<Func<T, object>>[] navigations);
         IQueryable<T> Query(bool eager = false);
         //Task<int> UpdateAsyncWithAllChildren(T entity);

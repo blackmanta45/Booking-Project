@@ -25,7 +25,7 @@
             var randomColor = colors[new Random().Next(colors.Count)];
 
             <article class="postcard light @randomColor">
-                
+
                 <a class="postcard__img_link"
                    asp-page="../Hotels/HotelDetails"
                    asp-route-id=@hotel.Id
@@ -35,7 +35,7 @@
                     <img class="postcard__img" src=@hotel.Picture alt="Image Title" style="height: 40vh; object-fit: cover; width: 40vw;"/>
                 </a>
                 <div class="postcard__text t-dark">
-                    
+
                     <a class="postcard__img_link"
                        asp-page="../Hotels/HotelDetails"
                        asp-route-id=@hotel.Id

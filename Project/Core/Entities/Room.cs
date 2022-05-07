@@ -5,14 +5,15 @@ using Core.Entities.Base;
 namespace Core.Entities
 {
     [Table("Room")]
-    public sealed class Room : BaseEntity, ITrackUser
+    public sealed class Room : BaseEntity,
+        ITrackUser
     {
         [Range(1, int.MaxValue)]
         public int Amount { get; set; }
 
         [Required]
         public RoomType Type { get; set; }
-        
+
         [Required]
         public Hotel Hotel { get; set; }
     }

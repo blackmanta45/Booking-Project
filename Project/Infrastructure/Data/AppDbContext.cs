@@ -16,10 +16,12 @@ namespace Infrastructure.Data;
 public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     private readonly IHttpContextAccessor httpContextAccessor;
+
     public AppDbContext(DbContextOptions<AppDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
     {
         this.httpContextAccessor = httpContextAccessor;
     }
+
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
@@ -49,15 +51,15 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
         modified.ForEach(e =>
         {
             e.Property(x => x.ModifiedAt).CurrentValue = DateTime.Now;
-            e.Reference(x => x.ModifiedBy).CurrentValue = user ?? e.Reference(x => x.ModifiedBy).CurrentValue;
+            e.Reference(x => x.ModifiedBy).CurrentValue = user;
         });
 
         added.ForEach(e =>
         {
             e.Property(x => x.CreatedAt).CurrentValue = DateTime.Now;
-            e.Reference(x => x.CreatedBy).CurrentValue = user ?? e.Reference(x => x.ModifiedBy).CurrentValue;
+            e.Reference(x => x.CreatedBy).CurrentValue = user;
             e.Property(x => x.ModifiedAt).CurrentValue = DateTime.Now;
-            e.Reference(x => x.ModifiedBy).CurrentValue = user ?? e.Reference(x => x.ModifiedBy).CurrentValue;
+            e.Reference(x => x.ModifiedBy).CurrentValue = user;
         });
 
         return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);

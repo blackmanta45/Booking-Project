@@ -1,6 +1,6 @@
 ﻿@page
-@using Newtonsoft.Json
 @using System.Security.Claims
+@using Newtonsoft.Json
 @model Presentation.Pages.Hotels.HotelDetailsModel
 @{
     ViewData["Title"] = "Booking";
@@ -38,7 +38,7 @@
                 <div class="details col-md">
                     <h3 class="product-title">@Model.HotelDetailsDisplayModel.Name</h3>
                     <div class="rating">
-                        <div class="stars" style="text-align: left; margin-bottom: 15px;">
+                        <div class="stars" style="margin-bottom: 15px; text-align: left;">
                             @for (var i = 0; i < 5; i++)
                             {
                                 <span class="fa fa-star @(Model.HotelDetailsDisplayModel.Rating > i ? "checked" : "")"></span>
@@ -46,7 +46,7 @@
                         </div>
                         <span class="review-no">@Model.HotelDetailsDisplayModel.Reviews.Count reviews / @Model.Hotel.Rooms.Count rooms left</span>
                     </div>
-                    <div style="text-align: left; margin-bottom: 15px;">@Model.Start.ToString("dd/MM/yyyy").Trim() - @Model.End.ToString("dd/MM/yyyy").Trim()</div>
+                    <div style="margin-bottom: 15px; text-align: left;">@Model.Start.ToString("dd/MM/yyyy").Trim() - @Model.End.ToString("dd/MM/yyyy").Trim()</div>
                     <p class="product-description">@Model.HotelDetailsDisplayModel.Description</p>
                     <h4 class="price">Current Price <span>@Model.HotelDetailsDisplayModel.Price</span></h4>
                     <p class="vote"><strong>@(Model.HotelDetailsDisplayModel.EnjoyPercentage)%</strong> of buyers enjoyed this product!</p>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="card-info">
                             <div class="rating">
-                                <div class="stars" style="text-align: left; margin-bottom: 15px;">
+                                <div class="stars" style="margin-bottom: 15px; text-align: left;">
                                     @for (var i = 0; i < 5; i++)
                                     {
                                         <span class="fa fa-star @(review.Value > i ? "checked" : "")"></span>

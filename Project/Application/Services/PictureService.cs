@@ -6,13 +6,13 @@ namespace Application.Services
 {
     public class PictureService : IPictureService
     {
+        private readonly IHotelPictureRepository hotelPictureRepository;
         private readonly IPictureRepository pictureRepository;
         private readonly IUserPictureRepository userPictureRepository;
-        private readonly IHotelPictureRepository hotelPictureRepository;
         private readonly IUserRepository userRepository;
 
         public PictureService(
-            IPictureRepository pictureRepository, 
+            IPictureRepository pictureRepository,
             IUserPictureRepository userPictureRepository,
             IUserRepository userRepository,
             IHotelPictureRepository hotelPictureRepository)
@@ -44,7 +44,11 @@ namespace Application.Services
         public async Task AddHotelPicture(Hotel hotel, byte[] picture)
         {
             var dbPicture = await this.pictureRepository.AddAsync(new Picture {Bytes = picture});
-            await this.hotelPictureRepository.AddAsync(new HotelPicture {Picture = dbPicture, Hotel = hotel});
+            await this.hotelPictureRepository.AddAsync(new HotelPicture
+            {
+                Picture = dbPicture,
+                Hotel = hotel
+            });
         }
     }
 }

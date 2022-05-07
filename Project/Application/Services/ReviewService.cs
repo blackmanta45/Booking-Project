@@ -9,9 +9,9 @@ namespace Application.Services
     public class ReviewService : IReviewService
     {
         private readonly IHotelRepository hotelRepository;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IReviewRepository reviewRepository;
         private readonly IUserRepository userRepository;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
         public ReviewService(
             IReviewRepository reviewRepository,
@@ -32,6 +32,10 @@ namespace Application.Services
         {
             var hotel = await this.hotelRepository.GetHotelAsync(hotelId);
             var user = await this.userRepository.GetByIdAsync(Guid.Parse(this.httpContextAccessor.HttpContext.User.Identity.GetUserId()));
+
+            if (user is null || hotel is null)
+                return; 
+
             var review = new Review
             {
                 Value = value,

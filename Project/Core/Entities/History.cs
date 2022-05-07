@@ -13,17 +13,17 @@ namespace Core.Entities
 
         [Required]
         public int People { get; set; }
-        
+
         [Required]
         public Hotel Hotel { get; set; }
-        
+
         [Required]
         public User User { get; set; }
-        
+
         [Required]
 
         public DateTime StartDate { get; set; }
-        
+
         [Required]
         public DateTime EndDate { get; set; }
     }

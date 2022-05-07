@@ -9,17 +9,23 @@ namespace Presentation.Pages.Home
     {
         [BindProperty]
         public HomeViewModel ViewModel { get; set; } = new();
-        
-        public async Task<IActionResult> OnGetAsync()
-        {
-            return this.Page();
-        }
+
+        public async Task<IActionResult> OnGetAsync() => this.Page();
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (this.ModelState.IsValid)
             {
-                return this.RedirectToPage("../Hotels/HotelList", new {ViewModel.StartDate, ViewModel.EndDate, ViewModel.Latitude, ViewModel.Longitude, ViewModel.City, ViewModel.Country, ViewModel.People});
+                return this.RedirectToPage("../Hotels/HotelList", new
+                {
+                    this.ViewModel.StartDate,
+                    this.ViewModel.EndDate,
+                    this.ViewModel.Latitude,
+                    this.ViewModel.Longitude,
+                    this.ViewModel.City,
+                    this.ViewModel.Country,
+                    this.ViewModel.People
+                });
             }
 
             return this.Page();
