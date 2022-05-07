@@ -9,14 +9,14 @@ using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Presentation.Pages.HotelList
+namespace Presentation.Pages.Hotels
 {
-    public class HotelListIndexModel : PageModel
+    public class HotelListModel : PageModel
     {
         private readonly IDisplayModelResourceServant displayModelResourceServant;
         private readonly IHotelService hotelService;
 
-        public HotelListIndexModel(IHotelService hotelService, IDisplayModelResourceServant displayModelResourceServant)
+        public HotelListModel(IHotelService hotelService, IDisplayModelResourceServant displayModelResourceServant)
         {
             this.hotelService = hotelService;
             this.displayModelResourceServant = displayModelResourceServant;

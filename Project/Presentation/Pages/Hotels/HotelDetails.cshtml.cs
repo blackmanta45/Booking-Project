@@ -9,15 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace Presentation.Pages.HotelDetails
+namespace Presentation.Pages.Hotels
 {
-    public class HotelDetailsIndexModel : PageModel
+    public class HotelDetailsModel : PageModel
     {
         private readonly IDisplayModelResourceServant displayModelResourceServant;
         private readonly IHotelService hotelService;
         private readonly IReviewService reviewService;
 
-        public HotelDetailsIndexModel(
+        public HotelDetailsModel(
             IHotelService hotelService,
             IDisplayModelResourceServant displayModelResourceServant,
             IReviewService reviewService)
@@ -58,7 +58,8 @@ namespace Presentation.Pages.HotelDetails
             DateTime end)
         {
             var hotel = await this.hotelService.GetHotelDetails(hotelId, people);
-            await this.hotelService.Reserve(hotel, people, start, end);
+            if (hotel != null)
+                await this.hotelService.Reserve(hotel, people, start, end);
             return this.RedirectToPage("/home/index");
         }
 

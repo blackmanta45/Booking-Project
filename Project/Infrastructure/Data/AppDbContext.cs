@@ -68,6 +68,5 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
         base.OnModelCreating(modelBuilder);
         modelBuilder.SeedRoomTypes();
         modelBuilder.SeedHotels();
-        //modelBuilder.SeedRoles();
     }
 }

@@ -14,6 +14,7 @@ namespace Application
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<IPictureService, PictureService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoomService, RoomService>();
 
             services.AddScoped<IDisplayModelResourceServant, DisplayModelResourceServant>();
 

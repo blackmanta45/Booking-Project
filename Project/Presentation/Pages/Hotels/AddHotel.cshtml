@@ -1,0 +1,151 @@
+﻿@page
+@model Presentation.Pages.Hotels.AddHotelModel
+@{
+}
+
+@section Styles{
+    <link href="@Url.Content("~/css/AddHotel.css")" rel="stylesheet" type="text/css"/>
+}
+
+
+<div style="overflow-anchor: none;">
+    <form enctype="multipart/form-data" method="post">
+        <div class="container">
+            <input id="latitude" type="hidden"asp-for="Model.Latitude">
+            <input id="longitude" type="hidden" asp-for="Model.Longitude">
+            <h1>Add Hotel</h1>
+            <p>Please fill in this form to create a hotel.</p>
+            <hr>
+
+            <label for="Location">
+                <b>Location</b>
+            </label>
+            <input placeholder="Enter Location" type="text" id="location" required asp-for="Model.Location"/>
+            <span class="text-danger" asp-validation-for="Model.Location"></span>
+
+            <div class="map" id="map"></div>
+
+            <label for="Name">
+                <b>Name</b>
+            </label>
+            <input type="text" placeholder="Enter Hotel Name" required asp-for="Model.Name">
+            <span class="text-danger" asp-validation-for="Model.Name"></span>
+
+            <br/>
+            <label for="Description">
+                <b>Description</b>
+            </label>
+            <input type="text" placeholder="Enter Hotel Description" required asp-for="Model.Description">
+            <span class="text-danger" asp-validation-for="Model.Description"></span>
+
+            <br/>
+            <label for="ShortDescription">
+                <b>Short Description</b>
+            </label>
+            <input type="text" placeholder="Enter Hotel Short Description" required asp-for="Model.ShortDescription">
+            <span class="text-danger" asp-validation-for="Model.ShortDescription"></span>
+
+            <br/>
+            <label for="Quality">
+                <b>Quality</b>
+            </label>
+            <select
+                asp-for="Model.Quality"
+                value="1"
+                placeholder="Quality">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Model.Quality"></span>
+
+            <br/>
+            <label for="OnePersonRoom">
+                <b>1 Person Rooms</b>
+            </label>
+            <input type="number" placeholder="Number of 1 Person Rooms" required asp-for="Model.OnePersonRooms" min="0" max="20">
+            <span class="text-danger" asp-validation-for="Model.OnePersonRooms"></span>
+
+            <br/>
+            <label for="TwoPersonRoom">
+                <b>2 Person Rooms</b>
+            </label>
+            <input type="number" placeholder="Number of 2 Person Rooms" required asp-for="Model.TwoPersonRooms" min="0" max="20">
+            <span class="text-danger" asp-validation-for="Model.TwoPersonRooms"></span>
+
+            <br/>
+            <label for="ThreePersonRoom">
+                <b>3 Person Rooms</b>
+            </label>
+            <input type="number" placeholder="Number of 3 Person Rooms" required asp-for="Model.ThreePersonRooms" min="0" max="20">
+            <span class="text-danger" asp-validation-for="Model.ThreePersonRooms"></span>
+
+            <br/>
+            <label for="FourPersonRoom">
+                <b>4 Person Rooms</b>
+            </label>
+            <input type="number" placeholder="Number of 4 Person Rooms" required asp-for="Model.FourPersonRooms" min="0" max="20">
+            <span class="text-danger" asp-validation-for="Model.FourPersonRooms"></span>
+
+            <br/>
+            <label for="FivePersonRoom">
+                <b>5 Person Rooms</b>
+            </label>
+            <input type="number" placeholder="Number of 5 Person Rooms" required asp-for="Model.FivePersonRooms" min="0" max="20">
+            <span class="text-danger" asp-validation-for="Model.FivePersonRooms"></span>
+
+            <br/>
+            <label for="SixPersonRoom">
+                <b>6 Person Rooms</b>
+            </label>
+            <input type="number" placeholder="Number of 6 Person Rooms" required asp-for="Model.SixPersonRooms" min="0" max="20">
+            <span class="text-danger" asp-validation-for="Model.SixPersonRooms"></span>
+
+            <br/>
+            <label for="Photos">
+                <b>Photos</b>
+            </label>
+            <input class="form-control" style="border-radius: 0;"type="file" asp-for="Model.Picture" multiple/>
+            <span asp-validation-for="Model.Picture" class="text-danger"></span>
+
+            <hr>
+            <p>By adding a hotel you agree to our <a asp-page="../Utils/TermsAndServices">Terms & Privacy</a>.</p>
+
+            <button class="registerbtn" type="submit">Add</button>
+        </div>
+    </form>
+</div>
+
+<!-- map script -->
+<script>
+    function addressUpdated(addressComponents) {
+        var street = addressComponents.addressLine1;
+        var city = addressComponents.city;
+        var state = addressComponents.postalCode;
+        var country = addressComponents.country;
+    }
+
+    function update(element) {
+        var location = element.locationpicker('map').location;
+        addressUpdated(location.addressComponents);
+
+        $('#latitude')[0].value = location.latitude;
+        $('#longitude')[0].value = location.longitude;
+    }
+
+    $('#map').locationpicker({
+        radius: 0,
+        inputBinding: {
+            locationNameInput: $('#location')
+        },
+        enableAutocomplete: true,
+        onchanged: function(currentLocation, radius, isMarkerDropped) {
+            update($(this));
+        },
+        oninitialized: function(component) {
+            update($(component));
+        }
+    });
+</script>

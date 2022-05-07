@@ -1,13 +1,13 @@
 ﻿@page
 @using Newtonsoft.Json
 @using System.Security.Claims
-@model Presentation.Pages.HotelDetails.HotelDetailsIndexModel
+@model Presentation.Pages.Hotels.HotelDetailsModel
 @{
     ViewData["Title"] = "Booking";
 }
 
 @section Styles{
-    <link href="@Url.Content("~/css/HotelDetailsIndex.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/css/HotelDetails.css")" rel="stylesheet" type="text/css"/>
 }
 
 <div class="container">
@@ -133,7 +133,7 @@
         $("#addreview").click(function() {
             $.ajax({
                 type: "POST",
-                url: "HotelDetailsIndex?handler=AddReview",
+                url: "HotelDetails?handler=AddReview",
                 contentType: "application/json; charset=utf-8",
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader("XSRF-TOKEN",
@@ -164,7 +164,7 @@
             $('#modal-close-btn').prop('disabled', true);
             $.ajax({
                 type: "POST",
-                url: "HotelDetailsIndex?handler=AddReviewSubmit",
+                url: "HotelDetails?handler=AddReviewSubmit",
                 data: {
                     description: description.toString(),
                     rating: rating,

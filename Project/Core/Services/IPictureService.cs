@@ -6,5 +6,6 @@ namespace Core.Services
     public interface IPictureService
     {
         Task AddUserPicture(User user, byte[] picture);
+        Task AddHotelPicture(Hotel hotel, byte[] picture);
     }
 }

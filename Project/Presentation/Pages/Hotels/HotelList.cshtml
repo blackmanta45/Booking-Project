@@ -1,11 +1,11 @@
 ﻿@page
-@model Presentation.Pages.HotelList.HotelListIndexModel
+@model Presentation.Pages.Hotels.HotelListModel
 @{
     ViewData["Title"] = "Booking";
 }
 
 @section Styles{
-    <link href="@Url.Content("~/css/HotelListIndex.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/css/HotelList.css")" rel="stylesheet" type="text/css"/>
 }
 
 <section>
@@ -27,7 +27,7 @@
             <article class="postcard light @randomColor">
                 
                 <a class="postcard__img_link"
-                   asp-page="../HotelDetails/HotelDetailsIndex"
+                   asp-page="../Hotels/HotelDetails"
                    asp-route-id=@hotel.Id
                    asp-route-people=@Model.People
                    asp-route-startDate="@Model.Start"
@@ -37,7 +37,7 @@
                 <div class="postcard__text t-dark">
                     
                     <a class="postcard__img_link"
-                       asp-page="../HotelDetails/HotelDetailsIndex"
+                       asp-page="../Hotels/HotelDetails"
                        asp-route-id=@hotel.Id
                        asp-route-people=@Model.People
                        asp-route-startDate="@Model.Start"

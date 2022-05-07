@@ -35,13 +35,13 @@ namespace Application.Services
             foreach (var hotel in hotels)
             {
                 var occupations = await this.occupationRepository.GetOccupationsForHotelAndPeriod(hotel, people, startDate, endDate);
-                hotel.Rooms  = hotel.Rooms
+                hotel.Rooms = hotel.Rooms
                     .Where(x => !occupations
                         .Where(y => y.Room == x)
                         .Any(y => y.Date >= startDate && y.Date <= endDate) && x.Type.People == people)
                     .ToList();
             }
-            
+
             hotels = hotels.Where(x => x.Rooms.Any()).ToList();
 
             return hotels.Where(x => this.Calculate(
@@ -56,13 +56,15 @@ namespace Application.Services
             AvailableRoomSize people)
         {
             var hotel = await this.hotelRepository.GetHotelAsync(id);
-            if (hotel is null) 
+            if (hotel is null)
                 return hotel;
 
             hotel.Rooms = hotel.Rooms?.Where(x => x.Type.People == people).ToList();
             hotel.Reviews = hotel.Reviews?.OrderByDescending(x => x.Date).ToList();
             return hotel;
         }
+
+        public async Task<Hotel> AddHotel(Hotel hotel) => await this.hotelRepository.AddAsync(hotel);
 
         public async Task Reserve(
             Hotel hotel,

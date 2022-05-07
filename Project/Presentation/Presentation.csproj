@@ -6,19 +6,23 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\css\About.css" />
+    <Content Remove="wwwroot\css\AddHotel.css" />
     <Content Remove="wwwroot\css\Contact.css" />
-    <Content Remove="wwwroot\css\HotelDetailsIndex.css" />
+    <Content Remove="wwwroot\css\HotelDetails.css" />
     <Content Remove="wwwroot\css\Login.css" />
+    <Content Remove="wwwroot\css\Profile.css" />
     <Content Remove="wwwroot\css\Register.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\HotelDetailsIndex.css" />
+    <None Include="wwwroot\css\HotelDetails.css" />
     <None Include="wwwroot\css\About.css" />
     <None Include="wwwroot\css\Contact.css" />
+    <None Include="wwwroot\css\Profile.css" />
+    <None Include="wwwroot\css\AddHotel.css" />
     <None Include="wwwroot\css\Register.css" />
     <None Include="wwwroot\css\Login.css" />
-    <None Include="wwwroot\css\HotelListIndex.css" />
+    <None Include="wwwroot\css\HotelList.css" />
   </ItemGroup>
 
   <ItemGroup>

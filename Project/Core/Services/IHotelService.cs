@@ -20,6 +20,8 @@ namespace Core.Services
             Guid id,
             AvailableRoomSize people);
 
+        Task<Hotel> AddHotel(Hotel hotel);
+
         Task Reserve(
             Hotel hotel,
             AvailableRoomSize people,
