@@ -1,12 +1,16 @@
 ﻿@page
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Core.Common.Enums
+@using Infrastructure.Extensions
+@using System.ComponentModel.DataAnnotations
 @model Presentation.Pages.Account.ProfileModel
 @{
     ViewData["Title"] = "Booking";
 }
 
 @section Styles{
+    <link rel="stylesheet" type="text/css" href="~/css/dd.css"/>
+    <script src="~/js/dd.js"></script>
     <link href="@Url.Content("~/css/Profile.css")" rel="stylesheet" type="text/css"/>
 }
 
@@ -55,7 +59,10 @@
         </label>
         <input type="password" placeholder="Enter Password" required asp-for="Model.Password">
         <span class="text-danger" asp-validation-for="Model.Password"></span>
-        <br/>
+        @if (Model.Model.PasswordsMatch == false)
+        {
+            <br/>
+        }
         <span class="text-danger" asp-validation-for="Model.PasswordsMatch"></span>
 
         <br/>
@@ -64,7 +71,10 @@
         </label>
         <input type="password" placeholder="Confirm Password" required asp-for="Model.RepeatedPassword">
         <span class="text-danger" asp-validation-for="Model.RepeatedPassword"></span>
-        <br/>
+        @if (Model.Model.PasswordsMatch == false)
+        {
+            <br/>
+        }
         <span class="text-danger" asp-validation-for="Model.PasswordsMatch"></span>
 
         <br/>
@@ -73,9 +83,23 @@
         </label>
         <select
             asp-for="Model.Gender"
-            asp-items="@(Html.GetEnumSelectList<Gender>())"
+            style="width: 100%"
+            is="ms-dropdown"
             placeholder="Select Gender"
-            value="@Model.Model.Gender">
+            data-child-height="160">
+            @foreach (var gender in Enum.GetValues(typeof(Gender)))
+            {
+                var img = gender.DescriptionAttr();
+                var display = gender.DisplayAttr();
+                if(display == "None")
+                {
+                    <option value=@gender>@display</option>
+                }
+                else
+                {
+                    <option data-image=@img value=@gender>@display</option>
+                }
+            }
         </select>
         <span asp-validation-for="Model.Gender" class="text-danger"></span>
 
