@@ -15,6 +15,10 @@ namespace Presentation
                 .AddDefaultTokenProviders()
                 .AddSignInManager();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            });
 
             services.Configure<IdentityOptions>(options =>
             {

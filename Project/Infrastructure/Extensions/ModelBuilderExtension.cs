@@ -238,8 +238,8 @@ namespace Infrastructure.Extensions
                 Name = "bbb",
                 Description = "BBBB",
                 ShortDescription = "BB",
-                Latitude = 44.31M,
-                Longitude = 23.84M,
+                Latitude = 44.308648751688416m,
+                Longitude = 23.83565425872803m,
                 Quality = 4
             }, new Hotel
             {
@@ -248,8 +248,8 @@ namespace Infrastructure.Extensions
                 Name = "bbb",
                 Description = "BBBB",
                 ShortDescription = "BB",
-                Latitude = 44.31M,
-                Longitude = 23.84M,
+                Latitude = 44.308648751688416m,
+                Longitude = 23.83565425872803m,
                 Quality = 3
             }, new Hotel
             {
@@ -258,8 +258,8 @@ namespace Infrastructure.Extensions
                 Name = "ccc",
                 Description = "CCCC",
                 ShortDescription = "CC",
-                Latitude = 44.31M,
-                Longitude = 23.84M,
+                Latitude = 44.308648751688416m,
+                Longitude = 23.83565425872803m,
                 Quality = 2
             }, new Hotel
             {
@@ -268,8 +268,8 @@ namespace Infrastructure.Extensions
                 Name = "ddd",
                 Description = "DDDD",
                 ShortDescription = "DD",
-                Latitude = 44.31M,
-                Longitude = 23.84M,
+                Latitude = 44.308648751688416m,
+                Longitude = 23.83565425872803m,
                 Quality = 1
             }, new Hotel
             {
@@ -278,8 +278,8 @@ namespace Infrastructure.Extensions
                 Name = "eee",
                 Description = "EEEE",
                 ShortDescription = "EE",
-                Latitude = 44.31M,
-                Longitude = 23.84M,
+                Latitude = 44.308648751688416m,
+                Longitude = 23.83565425872803m,
                 Quality = 1
             }, new Hotel
             {
@@ -288,8 +288,8 @@ namespace Infrastructure.Extensions
                 Name = "fff",
                 Description = "FFFF",
                 ShortDescription = "FF",
-                Latitude = 44.31M,
-                Longitude = 23.84M,
+                Latitude = 44.308648751688416m,
+                Longitude = 23.83565425872803m,
                 Quality = 1
             });
 

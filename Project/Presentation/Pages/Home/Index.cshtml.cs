@@ -16,6 +16,8 @@ namespace Presentation.Pages.Home
         {
             if (this.ModelState.IsValid)
             {
+                this.ViewModel.Latitude = 44308648751688416m;
+                this.ViewModel.Longitude = 2383565425872803m;
                 return this.RedirectToPage("../Hotels/HotelList", new
                 {
                     this.ViewModel.StartDate,

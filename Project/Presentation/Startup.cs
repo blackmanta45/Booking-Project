@@ -3,14 +3,12 @@ using System.Reflection;
 using System.Security.Claims;
 using Application;
 using Core;
-using Core.Entities;
 using Core.Settings;
 using Infrastructure;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,8 +68,7 @@ namespace Presentation
 
         public void Configure(
             IApplicationBuilder app,
-            IWebHostEnvironment env,
-            UserManager<User> userManager)
+            IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

@@ -68,6 +68,8 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Hotel>().Property(x => x.Longitude).HasPrecision(18, 15);
+        modelBuilder.Entity<Hotel>().Property(x => x.Latitude).HasPrecision(18, 15);
         modelBuilder.SeedRoomTypes();
         modelBuilder.SeedHotels();
     }
